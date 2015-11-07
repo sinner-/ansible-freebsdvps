@@ -5,3 +5,10 @@
   gather_facts: false
   roles:
     - role: initialise
+
+- name: setup OpenVPN
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: openvpn

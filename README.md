@@ -4,7 +4,7 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 
 ## Goals
 * TODO: Manage PF based firewall.
-* TODO: Manage OpenVPN based VPN.
+* Manage OpenVPN based VPN.
 ** TODO: Provide VPN gateway functionality.
 * TODO: Manage jails and jail networking.
 ** TODO: squid web proxy jail.
@@ -17,6 +17,14 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 *** TODO: postfix to use kerberos+LDAP.
 ** TODO: apache httpd jail.
 * TODO: Manage LDAP entries and kerberos accounts for users.
+
+## Before running
+* before running, need to generate OpenSSL certificates and copy to:
+** roles/openvpn/templates/cacert.pem
+** roles/openvpn/templates/openvpncert.pem
+** roles/openvpn/templates/openvpnkey.pem
+** roles/openvpn/templates/openvpndh4096.pem
+** roles/openvpn/templates/tls-auth.pem
 
 ## To run
 * run ansible-playbook -i hosts site.yaml

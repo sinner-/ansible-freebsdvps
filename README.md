@@ -3,7 +3,7 @@ Building on the work from https://github.com/sinner-/freebsdfun
 this is an ansible project to manage a VM based FreeBSD VPS. 
 
 ## Goals
-* TODO: Manage PF based firewall.
+* Manage PF based firewall.
 * Manage OpenVPN based VPN.
   * TODO: Provide VPN gateway functionality.
 * TODO: Manage jails and jail networking.
@@ -20,11 +20,13 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 
 ## Before running
 * before running, need to generate OpenSSL certificates and copy to:
-  * roles/openvpn/templates/cacert.pem
-  * roles/openvpn/templates/openvpncert.pem
-  * roles/openvpn/templates/openvpnkey.pem
-  * roles/openvpn/templates/openvpndh4096.pem
-  * roles/openvpn/templates/tls-auth.pem
+  * roles/openvpn/templates/certificates/cacert.pem
+  * roles/openvpn/templates/certificates/openvpncert.pem
+  * roles/openvpn/templates/certificates/openvpnkey.pem
+  * roles/openvpn/templates/certificates/openvpndh4096.pem
+  * roles/openvpn/templates/certificates/tls-auth.pem
 
 ## To run
-* run ansible-playbook -i hosts site.yaml
+* boot your VPS, preferably with the label "master".
+* copy hosts.example to hosts and update the IP address of master.
+* run `ansible-playbook -i hosts site.yml`.

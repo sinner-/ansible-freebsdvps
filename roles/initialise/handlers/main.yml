@@ -1,0 +1,5 @@
+- name: restart SSH daemon
+  command: service sshd restart
+
+- name: restart syslogd
+  command: service syslogd restart

@@ -1,0 +1,7 @@
+---
+- name: initialise VPS
+  hosts: master
+  remote_user: root
+  gather_facts: false
+  roles:
+    - role: initialise

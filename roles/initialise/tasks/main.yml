@@ -1,0 +1,25 @@
+---
+- name: initialise pkg
+  raw: echo y | ASSUME_ALWAYS_YES=yes /usr/sbin/pkg bootstrap
+
+- name: update FreeBSD repository catalogue
+  raw: /usr/sbin/pkg update -f
+
+- name: install Python 
+  raw: /usr/sbin/pkg install -y python
+
+- name: set live hostname to master
+#  hostname: name=master
+  command: /bin/hostname master
+
+- name: set configured hostname to master
+  lineinfile: dest=/etc/rc.conf regexp=^hostname= line=hostname=master
+  notify: restart syslogd
+
+- name: set crontab for daily NTP synchronisation
+  lineinfile: dest=/etc/crontab regexp='^@daily ntpdate -u pool.ntp.org' line='@daily ntpdate -u pool.ntp.org'
+
+- name: copy SSH daemon configuration
+  copy: src=sshd_config dest=/etc/ssh/sshd_config
+          owner=root group=wheel mode=0644
+  notify: restart SSH daemon

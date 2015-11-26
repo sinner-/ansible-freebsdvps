@@ -1,0 +1,13 @@
+---
+- name: install nginx
+  command: pkg install -y nginx
+  args:
+    creates: /usr/local/sbin/nginx
+
+- name: enable nginx in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^nginx_enable= line=nginx_enable=\"YES\"
+
+- name: deploy nginx.conf template
+  template: src=nginx.conf.j2 dest=/usr/local/etc/nginx/nginx.conf
+              owner=root group=wheel mode=0644
+  notify: restart nginx

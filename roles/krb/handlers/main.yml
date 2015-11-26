@@ -1,0 +1,5 @@
+- name: restart kerberos kdc
+  command: service kdc restart
+
+- name: restart kerberos kadmind
+  command: service kadmind restart

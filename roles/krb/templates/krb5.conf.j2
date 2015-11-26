@@ -1,0 +1,9 @@
+[libdefaults]
+    default_realm = LOCAL
+[realms]
+    LOCAL = {
+	kdc = master.local
+	admin_server = master.local
+    }
+[domain_realm]
+    .local = LOCAL

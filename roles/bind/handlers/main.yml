@@ -1,0 +1,2 @@
+- name: restart named
+  command: service named restart

@@ -1,0 +1,2 @@
+vpn_dns_nameserver: 10.8.0.1
+vpn_dns_search: local

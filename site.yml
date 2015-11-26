@@ -20,6 +20,13 @@
   roles:
     - role: nginx
 
+- name: setup bind
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: bind
+
 - name: setup PF firewall
   hosts: master
   remote_user: root

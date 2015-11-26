@@ -1,0 +1,12 @@
+$TTL 3600 ;1h TTL
+@    IN      SOA      master.local. admin.local. (
+                                2015012501      ; Serial
+                                10800           ; Refresh
+                                3600            ; Retry
+                                604800          ; Expire
+                                300             ; Negative Response TTL
+                        )
+ 
+0.8.10.in-addr.arpa.                IN      NS      master.local.
+ 
+1		 IN      PTR     master.local.

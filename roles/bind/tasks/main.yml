@@ -1,0 +1,23 @@
+---
+- name: install bind
+  command: pkg install -y bind910
+  args:
+    creates: /usr/local/sbin/named
+
+- name: enable named in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"
+
+- name: deploy named.conf template
+  template: src=named.conf.j2 dest=/usr/local/etc/namedb/named.conf
+              owner=root group=wheel mode=0644
+  notify: restart named
+
+- name: deploy local DNS zone
+  template: src=dns.local.j2 dest=/usr/local/etc/namedb/master/dns.local
+              owner=root group=wheel mode=0644
+  notify: restart named
+
+- name: deploy local reverse DNS template
+  template: src=0.8.10.in-addr.arpa.j2 dest=/usr/local/etc/namedb/master/0.8.10.in-addr.arpa
+              owner=root group=wheel mode=0644
+  notify: restart named

@@ -18,6 +18,3 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-push "dhcp-option DNS {{ vpn_dns_nameserver }}"
-push "dhcp-option SEARCH {{ vpn_dns_search }}"
-push "redirect-gateway def1 bypass-dhcp"

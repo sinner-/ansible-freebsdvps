@@ -23,3 +23,13 @@
   copy: src=sshd_config dest=/etc/ssh/sshd_config
           owner=root group=wheel mode=0644
   notify: restart SSH daemon
+
+- name: download portsnap archive
+  command: portsnap fetch
+  args:
+    creates: /var/db/portsnap
+
+- name: extract portsnap archive
+  command: portsnap extract
+  args:
+    creates: /var/db/portsnap/INDEX

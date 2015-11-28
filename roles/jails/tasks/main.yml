@@ -35,3 +35,27 @@
   notify:
     - restart jail bridge
     - restart jails
+
+- name: run jail newaliases
+  command: jexec {{ item }} newaliases
+  with_items: "{{ jails }}"
+  args:
+    creates: /jailhome/{{ item }}/etc/mail/aliases.db
+
+- name: set jail FQDN
+  lineinfile: dest=/jailhome/{{ item }}/etc/rc.conf regexp=^hostname= line=hostname={{ item }}.local create=yes
+  with_items: "{{ jails }}"
+  notify:
+    - restart jails
+
+- name: lock jail root
+  lineinfile: dest=/jailhome/{{ item }}/etc/master.passwd regexp=^root line="root:*:0:0::0:0:rootuser:/root:/bin/csh" create=yes
+  with_items: "{{ jails }}"
+  notify:
+    - restart jails
+
+- name: deploy rc.conf.local overrides
+  copy: src=rc.conf.local dest=/jailhome/{{ item }}/etc/rc.conf.local
+  with_items: "{{ jails }}"
+  notify:
+    - restart jails

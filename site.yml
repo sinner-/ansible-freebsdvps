@@ -5,6 +5,8 @@
   gather_facts: false
   roles:
     - role: initialise
+  tags:
+    - initialise
 
 - name: setup OpenVPN
   hosts: master
@@ -12,6 +14,8 @@
   gather_facts: true
   roles:
     - role: openvpn
+  tags:
+    - initialise 
 
 - name: setup jails
   hosts: master
@@ -19,6 +23,17 @@
   gather_facts: true
   roles:
     - role: jails
+  tags:
+    - initialise
+
+- name: setup PF firewall
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: firewall
+  tags:
+    - initialise
 
 - name: setup nginx
   hosts: master
@@ -40,10 +55,3 @@
   gather_facts: true
   roles:
     - role: krb
-
-- name: setup PF firewall
-  hosts: master
-  remote_user: root
-  gather_facts: true
-  roles:
-    - role: firewall

@@ -1,6 +1,6 @@
 # ansible-freebsdvps
 Building on the work from https://github.com/sinner-/freebsdfun
-this is an ansible project to manage a VM based FreeBSD VPS. 
+this is an ansible project to manage a VM based FreeBSD VPS.
 
 ## Goals
 * Manage PF based firewall.
@@ -17,17 +17,30 @@ this is an ansible project to manage a VM based FreeBSD VPS.
   * TODO: apache httpd.
 * TODO: Manage LDAP entries and kerberos accounts for users.
 
-## Before running
-* before running, need to generate OpenSSL certificates and copy to:
-  * roles/openvpn/templates/certificates/cacert.pem
-  * roles/openvpn/templates/certificates/openvpncert.pem
-  * roles/openvpn/templates/certificates/openvpnkey.pem
-  * roles/openvpn/templates/certificates/openvpndh4096.pem
-  * roles/openvpn/templates/certificates/tls-auth.pem
+## First Run
+* Boot a FreeBSD 10 VM (tested on FreeBSD 10.2)
+* Clone a copy of this repository:
+  * `git clone https://github.com/sinner-/ansible-freebsdvps`
+  * `cd ansible-freebsdvps`
+* Remove .git directory (optional):
+  * `rm -rf .git`
+* Copy hosts.example to hosts and change the example IP to your VMs IP:
+  * `cp hosts.example hosts`
+  * `sed -i 's/1.1.1.1/YOUR_VM_IP/' hosts
+* Generate OpenSSL certificates for OpenVPN and copy to:
+  * `roles/openvpn/templates/certificates/cacert.pem`
+  * `roles/openvpn/templates/certificates/openvpncert.pem`
+  * `roles/openvpn/templates/certificates/openvpnkey.pem`
+  * `roles/openvpn/templates/certificates/openvpndh4096.pem`
+  * `roles/openvpn/templates/certificates/tls-auth.pem`
+  * Make sure you have also generated and signed client certificates.
+* Run the playbook with the "initialise" tag:
+  * `ansible-playbook -i hosts site.yml --tags initialise`.
 
-## To run
-* boot your VPS, preferably with the label "master".
-* copy hosts.example to hosts and update the IP address of master.
-* run `ansible-playbook -i hosts site.yml`.
-* after the first run is complete, update your hosts file to point to the VPN address of the server.
-  * `sed -i 's/1.1.1.1/master.local' hosts`
+## Rerun
+* Once first run is complete, the SSH port is only accessible via VPN.
+* Change the hosts file to point to the VPN server IP:
+  * `sed -i 's/YOUR_VM_IP/10.8.0.1/'`
+* Configure your OpenVPN client and connect to the VM.
+* Now you can run the playbook with no tags:
+  * `ansible-playbook -i hosts site.yml`.

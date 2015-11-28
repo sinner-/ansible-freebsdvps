@@ -1,0 +1,8 @@
+---
+- name: restart jail bridge
+  command: service netif restart bridge0
+  ignore_errors: true
+
+- name: restart jails
+  command: service jail restart
+  ignore_errors: true

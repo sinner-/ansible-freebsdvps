@@ -33,3 +33,6 @@
   command: portsnap extract
   args:
     creates: /var/db/portsnap/INDEX
+
+- name: download jail base
+  get_url: url=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/10.2-RELEASE/base.txz dest=/root/base.txz

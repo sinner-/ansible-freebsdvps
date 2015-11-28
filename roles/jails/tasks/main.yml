@@ -1,0 +1,37 @@
+---
+- name:  deploy jail networking rc template
+  template: src=network.j2 dest=/etc/rc.conf.d/network
+  notify:
+    - restart jail bridge
+    - restart jails
+
+- name: deploy jail rc template
+  template: src=jail.j2 dest=/etc/rc.conf.d/jail
+  notify:
+    - restart jail bridge
+    - restart jails
+
+- name: deploy jail.conf template
+  template: src=jail.conf.j2 dest=/etc/jail.conf
+  notify:
+    - restart jail bridge
+    - restart jails
+
+- name: create jail home
+  file: dest=/jailhome state=directory
+
+- name: create jail rootdirs
+  file: dest=/jailhome/{{ item }} state=directory
+  with_items: "{{ jails }}"
+  notify:
+    - restart jail bridge
+    - restart jails
+
+- name: extract jail rootdirs
+  unarchive: src=/root/base.txz dest=/jailhome/{{ item }}/ copy=no
+  with_items: "{{ jails }}"
+  args:
+    creates: /jailhome/{{ item }}/COPYRIGHT
+  notify:
+    - restart jail bridge
+    - restart jails

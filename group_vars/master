@@ -1,2 +1,9 @@
 vpn_dns_nameserver: 10.8.0.1
 vpn_dns_search: local
+jails:
+ - squid
+ - dns
+ - krb
+ - ldap
+ - www
+ - mail

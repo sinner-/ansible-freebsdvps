@@ -1,0 +1,40 @@
+exec.start = "/bin/sh /etc/rc";
+exec.stop = "/bin/sh /etc/rc.shutdown";
+exec.clean = true;
+mount.devfs = true;
+
+squid {
+  host.hostname="squid";
+  ip4.addr="192.168.254.10";
+  path="/jailhome/squid";
+}
+
+dns {
+  host.hostname="dns";
+  ip4.addr="192.168.254.11";
+  path="/jailhome/dns";
+}
+
+ldap {
+  host.hostname="ldap";
+  ip4.addr="192.168.254.12";
+  path="/jailhome/ldap";
+}
+
+krb {
+  host.hostname="krb";
+  ip4.addr="192.168.254.13";
+  path="/jailhome/krb";
+}
+
+mail {
+  host.hostname="mail";
+  ip4.addr="192.168.254.14";
+  path="/jailhome/mail";
+}
+
+www { 
+  host.hostname="www";
+  ip4.addr="192.168.254.15";
+  path="/jailhome/www";
+}

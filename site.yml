@@ -13,6 +13,13 @@
   roles:
     - role: openvpn
 
+- name: setup jails
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: jails
+
 - name: setup nginx
   hosts: master
   remote_user: root

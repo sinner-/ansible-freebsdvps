@@ -17,7 +17,7 @@
   notify: restart syslogd
 
 - name: set crontab for daily NTP synchronisation
-  lineinfile: dest=/etc/crontab regexp='^@daily ntpdate -u pool.ntp.org' line='@daily ntpdate -u pool.ntp.org'
+  lineinfile: dest=/etc/crontab regexp='^@daily root ntpdate -u pool.ntp.org' line='@daily root ntpdate -u pool.ntp.org'
 
 - name: copy SSH daemon configuration
   copy: src=sshd_config dest=/etc/ssh/sshd_config
@@ -27,12 +27,12 @@
 - name: download portsnap archive
   command: portsnap fetch
   args:
-    creates: /var/db/portsnap
+    creates: /var/db/portsnap/INDEX
 
 - name: extract portsnap archive
   command: portsnap extract
   args:
-    creates: /var/db/portsnap/INDEX
+    creates: /usr/ports/net
 
 - name: download jail base
   get_url: url=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/10.2-RELEASE/base.txz dest=/root/base.txz

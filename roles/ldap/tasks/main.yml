@@ -1,0 +1,25 @@
+---
+- name: deploy local resolv.conf
+  copy: src=resolv.conf dest=/jailhome/ldap/etc/resolv.conf
+
+- name:  deploy ports configuration options
+  unarchive: src=portsconfig-openldap24-sasl-server.tgz dest=/jailhome/ldap/var/db/ports
+  args:
+    creates: /jailhome/ldap/var/db/ports/net_openldap24-server/options
+
+- name: compile OpenLDAP components from ports
+  command: chdir=/usr/ports/net/openldap24-server make install clean DESTDIR=/jailhome/ldap
+  args:
+    creates: /jailhome/ldap/usr/local/libexec/slapd
+
+- name: enable slapd in rc.conf
+  lineinfile: dest=/jailhome/ldap/etc/rc.conf regexp=^slapd_enable= line=slapd_enable=\"YES\"
+
+- name: deploy ldap.conf template
+  template: src=ldap.conf.j2 dest=/jailhome/ldap/usr/local/etc/openldap/ldap.conf
+              owner=root group=wheel mode=0644
+
+- name: deploy slapd.conf template
+  template: src=slapd.conf.j2 dest=/jailhome/ldap/usr/local/etc/openldap/slapd.conf
+              owner=root group=wheel mode=0644
+  notify: restart slapd

@@ -1,5 +1,5 @@
 - name: restart kerberos kdc
-  command: service kdc restart
+  command: jexec krb service kdc restart
 
 - name: restart kerberos kadmind
-  command: service kadmind restart
+  command: jexec krb service kadmind restart

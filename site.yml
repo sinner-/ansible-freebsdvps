@@ -62,3 +62,10 @@
   gather_facts: true
   roles:
     - role: krb
+
+- name: setup ldap
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: ldap

@@ -5,16 +5,16 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 ## Goals
 * Manage PF based firewall.
 * Manage OpenVPN based VPN.
-  * TODO: Provide VPN gateway functionality.
-* TODO: Manage server software:
-  * TODO: squid web proxy.
-  * BIND DNS.
-  * kerberos auth.
-  * TODO: LDAP directory.
-  * TODO: LDAP to use kerberos.
-  * TODO: postfix MTA.
+  * Provide VPN gateway functionality.
+* TODO: Manage server jails:
+  * squid web proxy jail.
+  * BIND DNS jail.
+  * kerberos auth jail.
+  * LDAP directory jail.
+  * LDAP uses kerberos.
+  * TODO: postfix MTA jail.
     * TODO: postfix to use kerberos+LDAP.
-  * TODO: apache httpd.
+  * nginx jail.
 * TODO: Manage LDAP entries and kerberos accounts for users.
 
 ## First Run

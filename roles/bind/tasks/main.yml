@@ -1,6 +1,6 @@
 ---
 - name: install google DNS resolv.conf
-  file: src=resolv.conf dest=/jailhome/dns/etc/resolv.conf state=touch
+  copy: src=resolv.conf dest=/jailhome/dns/etc/resolv.conf
 
 - name: install bind
   command: pkg -j dns install -y bind910

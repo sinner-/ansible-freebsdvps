@@ -1,0 +1,24 @@
+---
+- name: install google DNS resolv.conf
+  copy: src=resolv.conf dest=/jailhome/squid/etc/resolv.conf
+
+- name: install squid
+  command: pkg -j squid install -y squid
+  args:
+    creates: /jailhome/squid/usr/local/sbin/squid
+
+- name: deploy squid.conf template
+  template: src=squid.conf.j2 dest=/jailhome/squid/usr/local/etc/squid/squid.conf
+  notify: restart squid
+
+- name: initialise squid cache
+  command: jexec squid squid -z
+  async: 0
+  poll: 0
+  args:
+    creates: /jailhome/squid/var/squid/cache/00
+  notify: restart squid
+
+- name: enable squid in rc.conf
+  lineinfile: dest=/jailhome/squid/etc/rc.conf regexp=^squid_enable= line=squid_enable=\"YES\"
+  notify: restart squid

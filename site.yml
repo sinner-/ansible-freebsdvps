@@ -35,6 +35,13 @@
   tags:
     - initialise
 
+- name: setup squid
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: squid
+
 - name: setup nginx
   hosts: master
   remote_user: root

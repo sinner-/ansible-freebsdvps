@@ -1,0 +1,5 @@
+---
+- name: restart squid
+  command: jexec squid service squid restart
+  async: 0
+  poll: 0

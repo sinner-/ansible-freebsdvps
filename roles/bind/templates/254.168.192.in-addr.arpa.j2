@@ -1,5 +1,5 @@
 $TTL 3600 ;1h TTL
-@    IN      SOA      master.local. admin.local. (
+@    IN      SOA      dns.local. admin.local. (
                                 2015012501      ; Serial
                                 10800           ; Refresh
                                 3600            ; Retry
@@ -7,6 +7,10 @@ $TTL 3600 ;1h TTL
                                 300             ; Negative Response TTL
                         )
  
-0.8.10.in-addr.arpa.                IN      NS      master.local.
+254.168.192.in-addr.arpa.                IN      NS      dns.local.
  
-1		 IN      PTR     master.local.
+9		 IN      PTR     master.local.
+10               IN      PTR     squid.local.
+11               IN      PTR     dns.local.
+12               IN      PTR     ldap.local.
+13               IN      PTR     krb.local.

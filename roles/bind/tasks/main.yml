@@ -1,23 +1,28 @@
 ---
+- name: install google DNS resolv.conf
+  file: src=resolv.conf dest=/jailhome/dns/etc/resolv.conf state=touch
+
 - name: install bind
-  command: pkg install -y bind910
+  command: pkg -j dns install -y bind910
   args:
-    creates: /usr/local/sbin/named
+    creates: /jailhome/dns/usr/local/sbin/named
+  environment:
+    http_proxy: http://192.168.254.10:3128/
 
 - name: enable named in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"
+  lineinfile: dest=/jailhome/dns/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"
 
 - name: deploy named.conf template
-  template: src=named.conf.j2 dest=/usr/local/etc/namedb/named.conf
+  template: src=named.conf.j2 dest=/jailhome/dns/usr/local/etc/namedb/named.conf
               owner=root group=wheel mode=0644
   notify: restart named
 
 - name: deploy local DNS zone
-  template: src=dns.local.j2 dest=/usr/local/etc/namedb/master/dns.local
+  template: src=dns.local.j2 dest=/jailhome/dns/usr/local/etc/namedb/master/dns.local
               owner=root group=wheel mode=0644
   notify: restart named
 
 - name: deploy local reverse DNS template
-  template: src=0.8.10.in-addr.arpa.j2 dest=/usr/local/etc/namedb/master/0.8.10.in-addr.arpa
+  template: src=254.168.192.in-addr.arpa.j2 dest=/jailhome/dns/usr/local/etc/namedb/master/254.168.192.in-addr.arpa
               owner=root group=wheel mode=0644
   notify: restart named

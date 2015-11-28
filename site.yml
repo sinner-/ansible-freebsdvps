@@ -42,19 +42,19 @@
   roles:
     - role: squid
 
-- name: setup nginx
-  hosts: master
-  remote_user: root
-  gather_facts: true
-  roles:
-    - role: nginx
-
 - name: setup bind
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
     - role: bind
+
+- name: setup nginx
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - role: nginx
 
 - name: setup kerberos
   hosts: master

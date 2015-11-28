@@ -1,13 +1,18 @@
 ---
+- name: deploy local resolv.conf
+  copy: src=resolv.conf dest=/jailhome/www/etc/resolv.conf
+
 - name: install nginx
-  command: pkg install -y nginx
+  command: pkg -j www install -y nginx
   args:
-    creates: /usr/local/sbin/nginx
+    creates: /jailhome/www/usr/local/sbin/nginx
+  environment:
+    http_proxy: http://squid:3128/
 
 - name: enable nginx in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp=^nginx_enable= line=nginx_enable=\"YES\"
+  lineinfile: dest=/jailhome/www/etc/rc.conf regexp=^nginx_enable= line=nginx_enable=\"YES\"
 
 - name: deploy nginx.conf template
-  template: src=nginx.conf.j2 dest=/usr/local/etc/nginx/nginx.conf
+  template: src=nginx.conf.j2 dest=/jailhome/www/usr/local/etc/nginx/nginx.conf
               owner=root group=wheel mode=0644
   notify: restart nginx

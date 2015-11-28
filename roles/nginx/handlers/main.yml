@@ -1,2 +1,2 @@
 - name: restart nginx
-  command: service nginx restart
+  command: jexec www service nginx restart

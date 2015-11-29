@@ -13,8 +13,6 @@
 
 - name: initialise squid cache
   command: jexec squid squid -z
-  async: 0
-  poll: 0
   args:
     creates: /jailhome/squid/var/squid/cache/00
   notify: restart squid

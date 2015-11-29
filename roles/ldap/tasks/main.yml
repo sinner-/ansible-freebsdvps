@@ -19,7 +19,10 @@
   template: src=ldap.conf.j2 dest=/jailhome/ldap/usr/local/etc/openldap/ldap.conf
               owner=root group=wheel mode=0644
 
+- name: deploy krb5.conf
+  copy: src=krb5.conf dest=/jailhome/ldap/etc/krb5.conf
+
 - name: deploy slapd.conf template
   template: src=slapd.conf.j2 dest=/jailhome/ldap/usr/local/etc/openldap/slapd.conf
-              owner=root group=wheel mode=0644
+              owner=389 group=389 mode=0644
   notify: restart slapd

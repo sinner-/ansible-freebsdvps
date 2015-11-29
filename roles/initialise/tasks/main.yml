@@ -34,5 +34,8 @@
   args:
     creates: /usr/ports/net
 
+- name: create ports distfiles dir
+  file: dest=/usr/ports/distfiles state=directory
+
 - name: download jail base
   get_url: url=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/10.2-RELEASE/base.txz dest=/root/base.txz

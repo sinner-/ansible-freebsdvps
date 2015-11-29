@@ -36,17 +36,17 @@
     - restart jail bridge
     - restart jails
 
-- name: run jail newaliases
-  command: jexec {{ item }} newaliases
-  with_items: "{{ jails }}"
-  args:
-    creates: /jailhome/{{ item }}/etc/mail/aliases.db
-
 - name: set jail FQDN
   lineinfile: dest=/jailhome/{{ item }}/etc/rc.conf regexp=^hostname= line=hostname={{ item }}.local create=yes
   with_items: "{{ jails }}"
   notify:
     - restart jails
+
+- name: run jail newaliases
+  command: jail -c path=/jailhome/{{ item }} host.hostname={{ item }}.local command=/usr/bin/newaliases
+  with_items: "{{ jails }}"
+  args:
+    creates: /jailhome/{{ item }}/etc/mail/aliases.db
 
 - name: lock jail root
   lineinfile: dest=/jailhome/{{ item }}/etc/master.passwd regexp=^root line="root:*:0:0::0:0:rootuser:/root:/bin/csh" create=yes

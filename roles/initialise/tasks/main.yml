@@ -9,8 +9,7 @@
   raw: /usr/sbin/pkg install -y python
 
 - name: set live hostname to master
-#  hostname: name=master
-  command: /bin/hostname master
+  hostname: name=master
 
 - name: set configured hostname to master
   lineinfile: dest=/etc/rc.conf regexp=^hostname= line=hostname=master

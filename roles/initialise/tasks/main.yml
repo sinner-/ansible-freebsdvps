@@ -13,7 +13,9 @@
 
 - name: set configured hostname to master
   lineinfile: dest=/etc/rc.conf regexp=^hostname= line=hostname=master
-  notify: restart syslogd
+  notify: 
+    - restart syslogd
+    - restart sendmail
 
 - name: set crontab for daily NTP synchronisation
   lineinfile: dest=/etc/crontab regexp='^@daily root ntpdate -u pool.ntp.org' line='@daily root ntpdate -u pool.ntp.org'

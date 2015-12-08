@@ -1,6 +1,6 @@
 ---
-- name: deploy local resolv.conf
-  copy: src=resolv.conf dest=/jailhome/ldap/etc/resolv.conf
+- name: deploy local resolv.conf template
+  template: src=resolv.conf.j2 dest=/jailhome/ldap/etc/resolv.conf
 
 - name:  deploy ports configuration options
   unarchive: src=portsconfig-openldap24-sasl-server.tgz dest=/jailhome/ldap/var/db/ports

@@ -17,14 +17,14 @@ $TTL 3600        ; 1 hour default TTL
 ;                IN      A       192.168.1.1
 
 ; Machine Names
-master		IN	A	192.168.254.9
-squid		IN	A	192.168.254.10
-dns             IN      A       192.168.254.11
-ldap            IN      A	192.168.254.12
-krb		IN      A	192.168.254.13
+master		IN	A	{{ jail_bridge_subnet }}.9
+squid		IN	A	{{ jail_bridge_subnet }}.10
+dns             IN      A       {{ jail_bridge_subnet }}.11
+ldap            IN      A	{{ jail_bridge_subnet }}.12
+krb		IN      A	{{ jail_bridge_subnet }}.13
 
-;mx              IN      A       192.168.254.4
-;mail            IN      A       192.168.254.5
+;mx              IN      A       {{ jail_bridge_subnet }}.4
+;mail            IN      A       {{ jail_bridge_subnet }}.5
 
 ; Aliases
 ;www             IN      CNAME   local.

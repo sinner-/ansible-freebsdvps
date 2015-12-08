@@ -1,6 +1,6 @@
 ---
-- name: deploy local resolv.conf
-  copy: src=resolv.conf dest=/jailhome/www/etc/resolv.conf
+- name: deploy local resolv.conf template
+  template: src=resolv.conf.j2 dest=/jailhome/www/etc/resolv.conf
 
 - name: install nginx
   command: pkg -j www install -y nginx

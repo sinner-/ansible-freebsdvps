@@ -7,7 +7,7 @@
   args:
     creates: /jailhome/dns/usr/local/sbin/named
   environment:
-    http_proxy: http://192.168.254.10:3128/
+    http_proxy: http://{{ jail_bridge_subnet}}.10:3128/
 
 - name: enable named in rc.conf
   lineinfile: dest=/jailhome/dns/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"

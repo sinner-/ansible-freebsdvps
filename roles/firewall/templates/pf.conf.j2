@@ -31,13 +31,13 @@ scrub out all random-id fragment reassemble
 ## Translation
 ##############
 #Squid NAT out
-nat pass on $ext_if from 192.168.254.10 to any -> $ext_ip
+nat pass on $ext_if from {{ jail_bridge_subnet }}.10 to any -> $ext_ip
 
 #DNS NAT out
-nat pass on $ext_if from 192.168.254.11 to any port 53 -> $ext_ip
+nat pass on $ext_if from {{ jail_bridge_subnet }}.11 to any port 53 -> $ext_ip
 
 #MTA NAT out
-nat pass on $ext_if from 192.168.254.14 to any port { 25, 587 } -> $ext_ip
+nat pass on $ext_if from {{ jail_bridge_subnet }}.14 to any port { 25, 587 } -> $ext_ip
 
 #OpenVPN Clients NAT out
 nat pass on $ext_if from 10.8.0.0/24 to any -> $ext_ip
@@ -47,11 +47,11 @@ nat pass on $ext_if from 10.8.0.0/24 to any -> $ext_ip
 ##############
 
 #MTA port forward in
-rdr on $ext_if proto tcp from any to any port 25 -> 192.168.254.14
+rdr on $ext_if proto tcp from any to any port 25 -> {{ jail_bridge_subnet }}.14
 
 #HTTP port forward in
-rdr on $ext_if proto tcp from any to any port 80 -> 192.168.254.15
-rdr on $ext_if proto tcp from any to any port 443 -> 192.168.254.15
+rdr on $ext_if proto tcp from any to any port 80 -> {{ jail_bridge_subnet }}.15
+rdr on $ext_if proto tcp from any to any port 443 -> {{ jail_bridge_subnet }}.15
 
 #######################################
 ## Packet filtering

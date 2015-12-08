@@ -7,7 +7,7 @@ options {
 		8.8.4.4;
 		8.8.8.8;
 	};
-	allow-query { 10.8.0.0/24; {{ jail_bridge_subnet }}.0/24; };
+	allow-query { {{ vpn_tun_subnet }}.0/24; {{ jail_bridge_subnet }}.0/24; };
 };
 zone "." {
 	type slave;

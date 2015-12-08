@@ -7,7 +7,7 @@ key /usr/local/etc/openvpn/ssl/private/openvpnkey.pem  # This file should be kep
 dh /usr/local/etc/openvpn/ssl/private/openvpndh4096.pem
 tls-auth /usr/local/etc/openvpn/ssl/private/tls-auth.pem 0 # This file is secret
 topology subnet
-server 10.8.0.0 255.255.255.0
+server {{ vpn_tun_subnet }}.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 client-to-client
 keepalive 10 120
@@ -18,5 +18,5 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-push "dhcp-option DNS {{ vpn_dns_nameserver }}"
+push "dhcp-option DNS {{ vpn_tun_subnet }}.1"
 push "dhcp-option DOMAIN {{ vpn_dns_search }}"

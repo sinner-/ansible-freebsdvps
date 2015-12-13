@@ -23,6 +23,6 @@
   notify: restart named
 
 - name: deploy local reverse DNS template
-  template: src=254.168.192.in-addr.arpa.j2 dest=/jailhome/dns/usr/local/etc/namedb/master/254.168.192.in-addr.arpa
+  template: src=reversedns.local.j2 dest=/jailhome/dns/usr/local/etc/namedb/master/reversedns.local
               owner=root group=wheel mode=0644
   notify: restart named

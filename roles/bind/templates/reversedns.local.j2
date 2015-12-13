@@ -7,7 +7,7 @@ $TTL 3600 ;1h TTL
                                 300             ; Negative Response TTL
                         )
  
-254.168.192.in-addr.arpa.                IN      NS      dns.local.
+{{ jail_bridge_subnet.split(".")[2] }}.{{ jail_bridge_subnet.split(".")[1] }}.{{ jail_bridge_subnet.split(".")[0] }}.in-addr.arpa.                IN      NS      dns.local.
  
 9		 IN      PTR     master.local.
 10               IN      PTR     squid.local.

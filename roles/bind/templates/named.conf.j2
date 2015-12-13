@@ -193,8 +193,8 @@ zone "local" {
     allow-update { none; };
 };
 
-zone "254.168.192.in-addr.arpa" IN {
+zone "{{ jail_bridge_subnet.split(".")[2] }}.{{ jail_bridge_subnet.split(".")[1] }}.{{ jail_bridge_subnet.split(".")[0] }}.in-addr.arpa" IN {
     type master;
-    file "/usr/local/etc/namedb/master/254.168.192.in-addr.arpa";
+    file "/usr/local/etc/namedb/master/reversedns.local";
     allow-update { none; };
 };

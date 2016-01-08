@@ -5,7 +5,7 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 ## Goals
 * Manage PF based firewall.
 * Manage OpenVPN based VPN.
-  * Provide VPN gateway functionality.
+  * Provide VPN default gateway functionality.
 * TODO: Manage server jails:
   * squid web proxy jail.
   * BIND DNS jail.

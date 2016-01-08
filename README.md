@@ -26,7 +26,7 @@ this is an ansible project to manage a VM based FreeBSD VPS.
   * `rm -rf .git`
 * Copy hosts.example to hosts and change the example IP to your VMs IP:
   * `cp hosts.example hosts`
-  * `sed -i 's/1.1.1.1/YOUR_VM_IP/' hosts
+  * `sed -i 's/1.1.1.1/YOUR_VM_IP/' hosts`
 * Generate OpenSSL certificates for OpenVPN and copy to:
   * `roles/openvpn/templates/certificates/cacert.pem`
   * `roles/openvpn/templates/certificates/openvpncert.pem`

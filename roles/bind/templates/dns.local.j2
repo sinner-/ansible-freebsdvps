@@ -13,8 +13,6 @@ $TTL 3600        ; 1 hour default TTL
 ; MX Records
 ;                IN      MX 10   mx.local.
 ;                IN      MX 20   mail.local.
-;
-;                IN      A       192.168.1.1
 
 ; Machine Names
 master		IN	A	{{ jail_bridge_subnet }}.9
@@ -22,12 +20,8 @@ squid		IN	A	{{ jail_bridge_subnet }}.10
 dns             IN      A       {{ jail_bridge_subnet }}.11
 ldap            IN      A	{{ jail_bridge_subnet }}.12
 krb		IN      A	{{ jail_bridge_subnet }}.13
-
-;mx              IN      A       {{ jail_bridge_subnet }}.4
-;mail            IN      A       {{ jail_bridge_subnet }}.5
-
-; Aliases
-;www             IN      CNAME   local.
+mail		IN      A	{{ jail_bridge_subnet }}.14
+www		IN      A	{{ jail_bridge_subnet }}.15
 
 ; SRV records
 _kerberos._udp      IN  SRV     01 00 88 krb.local.

@@ -16,6 +16,7 @@ this is an ansible project to manage a VM based FreeBSD VPS.
     * TODO: postfix to use kerberos+LDAP.
   * nginx jail.
 * TODO: Manage LDAP entries and kerberos accounts for users.
+* Configure jail sendmails to forward to host root mail.
 
 ## First Run
 * Boot a FreeBSD 10 VM (tested on FreeBSD 10.2)

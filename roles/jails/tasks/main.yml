@@ -42,6 +42,10 @@
   notify:
     - restart jails
 
+- name: add master alias to jail /etc/mail/aliases
+  lineinfile: dest=/jailhome/{{ item }}/etc/mail/aliases regexp="^root:" line="root{{':'}} root@master.local"
+  with_items: "{{ jails }}"
+
 - name: run jail newaliases
   command: jail -c path=/jailhome/{{ item }} host.hostname={{ item }}.local command=/usr/bin/newaliases
   with_items: "{{ jails }}"

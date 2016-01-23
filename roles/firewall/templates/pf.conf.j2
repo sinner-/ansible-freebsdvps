@@ -78,6 +78,7 @@ block drop in quick on $ext_if from { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16,
 
 #Default Deny
 block drop in all
+block drop in inet6 all
 
 #Allow VPN traffic
 pass in on tun0 all

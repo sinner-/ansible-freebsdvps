@@ -15,8 +15,9 @@ this is an ansible project to manage a VM based FreeBSD VPS.
   * TODO: postfix MTA jail.
     * TODO: postfix to use kerberos+LDAP.
   * nginx jail.
+  * TODO: calendar jail.
 * TODO: Manage LDAP entries and kerberos accounts for users.
-* Configure jail sendmails to forward to host root mail.
+* jail sendmails forward to host root mail.
 
 ## First Run
 * Boot a FreeBSD 10 VM (tested on FreeBSD 10.2)
@@ -46,3 +47,21 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 * Configure your OpenVPN client and connect to the VM.
 * Now you can run the playbook with no tags:
   * `ansible-playbook -i hosts site.yml`.
+
+## Adding a new jail
+* Edit `group_vars/master` to add the jail name to the jails list.
+* Edit `roles/jails/templates/network.j2` to add a new IP address to the bridge for the jail.
+* Edit `roles/jails/templates/jail.conf.j2` and add a new jail entry.
+  * Use the IP address from prior step.
+* Edit `roles/bind/templates/dns.local.j2` to add a forward DNS entry for the jail.
+* Edit `roles/bind/templates/reversedns.local.j2` to add a reverse DNS entry for the jail.
+* If necessary, edit `roles/firewall/templates/pf.conf.j2` for appropriate firewall rules.
+* Make sure the new role for the jail installs a resolv.conf that points to local DNS:
+  * `nameserver 192.168.254.11`
+  * `search local`
+* Run playbook
+* On master, run:
+  * `export http_proxy="http://squid:3128`
+  * `freebsd-update -b /jailhome/jailname fetch`
+  * `freebsd-update -b /jailhome/jailname install`
+  * `pkg -j jailname update`

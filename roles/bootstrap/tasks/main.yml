@@ -39,7 +39,9 @@
   file: dest=/usr/ports/distfiles state=directory
 
 - name: download jail base
-  get_url: url=ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/10.2-RELEASE/base.txz dest=/root/base.txz
+  get_url: url=http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/{{ item }}-RELEASE/base.txz dest=/root/base.txz
+  with_items:
+      - "{{ freebsd_release }}"
 
 - name: enable sendmail full relay in rc.conf
   lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"YES\"'

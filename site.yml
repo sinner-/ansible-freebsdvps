@@ -1,19 +1,19 @@
 ---
-- name: initialise VPS
+- name: bootstrap VPS
   hosts: master
   remote_user: root
   gather_facts: false
   roles:
-    - { role: initialise, tags: ['initialise'] }
+    - { role: bootstrap, tags: ['bootstrap'] }
 
 - name: configure VPS
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - { role: openvpn, tags: [ 'initialise' ] }
-    - { role: jails, tags: [ 'initialise' ] }
-    - { role: firewall, tags: [ 'initialise' ] }
+    - { role: openvpn, tags: [ 'bootstrap' ] }
+    - { role: jails, tags: [ 'bootstrap' ] }
+    - { role: firewall, tags: [ 'bootstrap' ] }
     - squid
     - bind
     - nginx

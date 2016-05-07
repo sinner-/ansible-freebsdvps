@@ -1,5 +1,5 @@
 ---
-- name: initialise pkg
+- name: bootstrap pkg
   raw: echo y | ASSUME_ALWAYS_YES=yes /usr/sbin/pkg bootstrap
 
 - name: update FreeBSD repository catalogue

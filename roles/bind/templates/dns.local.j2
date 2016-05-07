@@ -18,14 +18,4 @@ $TTL 3600        ; 1 hour default TTL
 master		IN	A	{{ jail_bridge_subnet }}.9
 squid		IN	A	{{ jail_bridge_subnet }}.10
 dns             IN      A       {{ jail_bridge_subnet }}.11
-ldap            IN      A	{{ jail_bridge_subnet }}.12
-krb		IN      A	{{ jail_bridge_subnet }}.13
-mail		IN      A	{{ jail_bridge_subnet }}.14
 www		IN      A	{{ jail_bridge_subnet }}.15
-
-; SRV records
-_kerberos._udp      IN  SRV     01 00 88 krb.local.
-_kerberos._tcp      IN  SRV     01 00 88 krb.local.
-_kpasswd._udp       IN  SRV     01 00 464 krb.local.
-_kerberos-adm._tcp  IN  SRV     01 00 749 krb.local.
-_kerberos           IN  TXT     LOCAL

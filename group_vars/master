@@ -5,7 +5,4 @@ jail_bridge_subnet: 192.168.254
 jails:
  - squid
  - dns
- - krb
- - ldap
  - www
- - mail

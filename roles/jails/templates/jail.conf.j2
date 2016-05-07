@@ -15,26 +15,8 @@ dns {
   path="/jailhome/dns";
 }
 
-ldap {
-  host.hostname="ldap.local";
-  ip4.addr="{{ jail_bridge_subnet }}.12";
-  path="/jailhome/ldap";
-}
-
-krb {
-  host.hostname="krb.local";
-  ip4.addr="{{ jail_bridge_subnet }}.13";
-  path="/jailhome/krb";
-}
-
-mail {
-  host.hostname="mail.local";
-  ip4.addr="{{ jail_bridge_subnet }}.14";
-  path="/jailhome/mail";
-}
-
 www { 
   host.hostname="www.local";
-  ip4.addr="{{ jail_bridge_subnet }}.15";
+  ip4.addr="{{ jail_bridge_subnet }}.14";
   path="/jailhome/www";
 }

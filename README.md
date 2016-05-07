@@ -9,14 +9,9 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 * TODO: Manage server jails:
   * squid web proxy jail.
   * BIND DNS jail.
-  * kerberos auth jail.
-  * LDAP directory jail.
-  * LDAP uses kerberos.
   * TODO: postfix MTA jail.
-    * TODO: postfix to use kerberos+LDAP.
   * nginx jail.
   * TODO: calendar jail.
-* TODO: Manage LDAP entries and kerberos accounts for users.
 * jail sendmails forward to host root mail.
 
 ## First Run
@@ -36,8 +31,8 @@ this is an ansible project to manage a VM based FreeBSD VPS.
   * `roles/openvpn/templates/certificates/openvpndh4096.pem`
   * `roles/openvpn/templates/certificates/tls-auth.pem`
   * Make sure you have also generated and signed client certificates.
-* Run the playbook with the "initialise" tag:
-  * `ansible-playbook -i hosts site.yml --tags initialise`.
+* Run the playbook with the "bootstrap" tag:
+  * `ansible-playbook -i hosts site.yml --tags bootstrap`.
 
 ## Rerun
 * Once first run is complete, the SSH port is only accessible via VPN.

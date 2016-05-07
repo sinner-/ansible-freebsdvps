@@ -5,9 +5,14 @@
     creates: /usr/local/sbin/openvpn
 
 - name: create configuration directory
-  file: path=/usr/local/etc/openvpn state=directory mode=0644
-  file: path=/usr/local/etc/openvpn/ssl state=directory mode=0644
-  file: path=/usr/local/etc/openvpn/ssl/private state=directory mode=0600
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_items:
+    - { path: '/usr/local/etc/openvpn', mode: '0644' }
+    - { path: '/usr/local/etc/openvpn/ssl', mode: '0644' }
+    - { path: '/usr/local/etc/openvpn/ssl/private', mode: '0600' }
 
 - name: install OpenSSL public certificates
   template: src={{ item }} dest=/usr/local/etc/openvpn/ssl mode=0644

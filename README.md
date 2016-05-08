@@ -14,8 +14,8 @@ this is an ansible project to manage a VM based FreeBSD VPS.
   * TODO: calendar jail.
 * jail sendmails forward to host root mail.
 
-## First Run
-* Boot a FreeBSD 10 VM (tested on FreeBSD 10.2)
+## Bootstrap
+* Boot a FreeBSD 10 VM (tested on FreeBSD 10.3)
 * Clone a copy of this repository:
   * `git clone https://github.com/sinner-/ansible-freebsdvps`
   * `cd ansible-freebsdvps`
@@ -34,7 +34,7 @@ this is an ansible project to manage a VM based FreeBSD VPS.
 * Run the playbook with the "bootstrap" tag:
   * `ansible-playbook -i hosts site.yml --tags bootstrap`.
 
-## Rerun
+## Normal runs
 * Once first run is complete, the SSH port is only accessible via VPN.
 * Change the hosts file to point to the VPN server IP:
   * `sed -i 's/YOUR_VM_IP/10.8.0.1/'`

@@ -30,6 +30,11 @@
   with_items:
       - "{{ freebsd_release }}"
 
+- name: generate aliases
+  command: newaliases
+  args:
+    creates: /etc/mail/aliases.db
+
 - name: enable sendmail full relay in rc.conf
   lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"YES\"'
   notify: restart sendmail

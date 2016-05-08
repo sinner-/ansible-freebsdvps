@@ -25,19 +25,6 @@
           owner=root group=wheel mode=0644
   notify: restart SSH daemon
 
-- name: download portsnap archive
-  command: portsnap fetch
-  args:
-    creates: /var/db/portsnap/INDEX
-
-- name: extract portsnap archive
-  command: portsnap extract
-  args:
-    creates: /usr/ports/net
-
-- name: create ports distfiles dir
-  file: dest=/usr/ports/distfiles state=directory
-
 - name: download jail base
   get_url: url=http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/{{ item }}-RELEASE/base.txz dest=/root/base.txz
   with_items:

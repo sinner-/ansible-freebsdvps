@@ -1,2 +1,2 @@
 - name: restart PF
-  command: service pf restart
+  service: name=pf status=restarted

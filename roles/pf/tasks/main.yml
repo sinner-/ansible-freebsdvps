@@ -2,7 +2,7 @@
 - name: enable PF in rc.conf
   lineinfile: dest=/etc/rc.conf regexp=^pf_enable= line=pf_enable=\"YES\"
 
-- name: enable PF NAT in rc.conf
+- name: enable gateway in rc.conf
   lineinfile: dest=/etc/rc.conf regexp=^gateway_enable= line=gateway_enable=\"YES\"
 
 - name: deploy pf.conf rule template

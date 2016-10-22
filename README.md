@@ -36,7 +36,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
 ## Normal runs
 * Once first run is complete, the SSH port is only accessible via VPN.
 * Change the hosts file to point to the VPN server IP:
-  * `sed -i 's/YOUR_VM_IP/10.8.0.1/'`
+  * `sed -i 's/YOUR_VM_IP/10.8.0.1/' hosts`
     * (assuming you haven't changed the vpn_tun_subnet variable in group_vars/master)
 * Configure your OpenVPN client and connect to the VM.
 * Now you can run the playbook with no tags:

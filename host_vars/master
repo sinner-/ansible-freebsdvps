@@ -1,4 +1,4 @@
-freebsd_release: 10.3
+freebsd_release: 11
 vpn_tun_subnet: 10.8.0
 vpn_dns_search: local
 jail_bridge_subnet: 192.168.254

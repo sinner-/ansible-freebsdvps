@@ -14,7 +14,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
 * jail sendmails forward to host root mail.
 
 ## Bootstrap
-* Boot a FreeBSD 10 VM (tested on FreeBSD 10.3)
+* Boot a FreeBSD 11 VM (tested on FreeBSD 11.0)
 * Clone a copy of this repository:
   * `git clone https://github.com/sinner-/ansible-freebsdvps`
   * `cd ansible-freebsdvps`

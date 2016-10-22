@@ -1,0 +1,12 @@
+server {{ ntp_pool }} iburst
+
+restrict default limited kod nomodify notrap nopeer noquery
+restrict -6 default limited kod nomodify notrap nopeer noquery
+restrict 127.0.0.1
+restrict -6 ::1
+restrict 127.127.1.0
+
+leapfile "/var/db/ntpd.leap-seconds.list"
+
+interface ignore wildcard
+interface listen 127.0.0.1

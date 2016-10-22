@@ -1,6 +1,7 @@
 freebsd_release: 11.0
 vpn_tun_subnet: 10.8.0
 vpn_dns_search: local
+ntp_pool: au.pool.ntp.org
 jail_bridge_subnet: 192.168.254
 jails:
  - squid

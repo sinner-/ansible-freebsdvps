@@ -20,6 +20,13 @@
   roles:
     - { role: pf, tags: ['pf'] }    
 
+- name: configure ntpd
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - { role: ntpd, tags: ['ntpd'] }    
+
 - name: configure jails
   hosts: master
   remote_user: root

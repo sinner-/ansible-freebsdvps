@@ -1,0 +1,13 @@
+---
+- name: install ntpd
+  command: pkg install -y ntp
+  args:
+    creates: /usr/sbin/ntpd
+
+- name: enable ntpd in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp=^ntpd_enable= line=ntpd_enable=\"YES\"
+
+- name: deploy ntpd.conf template
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+              owner=root group=wheel mode=0644
+  notify: restart ntpd

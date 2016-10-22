@@ -4,46 +4,46 @@
   remote_user: root
   gather_facts: false
   roles:
-    - bootstrap
+    - { role: bootstrap, tags: ['bootstrap'] }
 
 - name: configure OpenVPN
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - openvpn
+    - { role: openvpn, tags: ['openvpn'] }      
 
 - name: configure PF firewall
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - pf
+    - { role: pf, tags: ['pf'] }    
 
 - name: configure jails
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - jails
+    - { role: jails, tags: ['jails'] }    
 
 - name: configure squid
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - squid
+    - { role: squid, tags: ['squid'] }    
 
 - name: configure bind
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - bind
+    - { role: bind, tags: ['bind'] }    
 
 - name: configure nginx
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - nginx
+    - { role: nginx, tags: ['nginx'] }    

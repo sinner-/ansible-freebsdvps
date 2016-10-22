@@ -49,7 +49,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * Use the IP address from prior step.
 * Edit `roles/bind/templates/dns.local.j2` to add a forward DNS entry for the jail.
 * Edit `roles/bind/templates/reversedns.local.j2` to add a reverse DNS entry for the jail.
-* If necessary, edit `roles/firewall/templates/pf.conf.j2` for appropriate firewall rules.
+* If necessary, edit `roles/pf/templates/pf.conf.j2` for appropriate firewall rules.
 * Make sure the new role for the jail installs a resolv.conf that points to local DNS:
   * `nameserver 192.168.254.11`
   * `search local`

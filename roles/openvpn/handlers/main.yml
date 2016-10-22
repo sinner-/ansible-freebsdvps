@@ -1,2 +1,2 @@
 - name: restart OpenVPN
-  command: service openvpn restart
+  service: name=openvpn status=restarted

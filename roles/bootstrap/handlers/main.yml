@@ -1,8 +1,5 @@
 - name: restart SSH daemon
-  command: service sshd restart
+  service: name=sshd state=restarted
 
 - name: restart syslogd
-  command: service syslogd restart
-
-- name: restart sendmail
-  command: service sendmail onerestart
+  command: name=syslogd state=restarted

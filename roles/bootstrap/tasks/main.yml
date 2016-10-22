@@ -1,9 +1,6 @@
 ---
-- name: bootstrap pkg
-  raw: echo y | ASSUME_ALWAYS_YES=yes /usr/sbin/pkg bootstrap
-
 - name: update FreeBSD repository catalogue
-  raw: /usr/sbin/pkg update -f
+  raw: /usr/sbin/pkg update
 
 - name: install Python 
   raw: /usr/sbin/pkg install -y python
@@ -15,33 +12,17 @@
   lineinfile: dest=/etc/rc.conf regexp=^hostname= line=hostname=master
   notify: 
     - restart syslogd
-    - restart sendmail
-
-- name: set crontab for daily NTP synchronisation
-  lineinfile: dest=/etc/crontab regexp='^@daily root ntpdate -u pool.ntp.org' line='@daily root ntpdate -u pool.ntp.org'
 
 - name: copy SSH daemon configuration
   copy: src=sshd_config dest=/etc/ssh/sshd_config
           owner=root group=wheel mode=0644
   notify: restart SSH daemon
 
-- name: download jail base
-  get_url: url=http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/{{ item }}-RELEASE/base.txz dest=/root/base.txz
-  with_items:
-      - "{{ freebsd_release }}"
+- name: disable sendmail in rc.conf
+  lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"NO\"'
 
-- name: generate aliases
-  command: newaliases
-  args:
-    creates: /etc/mail/aliases.db
-
-- name: enable sendmail full relay in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"YES\"'
-  notify: restart sendmail
-
-- name: enable sendmail_msp_queue full relay in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp='^sendmail_msp_queue_enable=' line='sendmail_msp_queue_enable=\"YES\"'
-  notify: restart sendmail
+- name: stop sendmail service
+  service: name=sendmail state=stopped
 
 - name: disable resolvconf
   copy: src=resolvconf.conf dest=/etc/resolvconf.conf

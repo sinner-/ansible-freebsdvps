@@ -1,4 +1,9 @@
 ---
+- name: download jail base
+  get_url: url=http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/{{ item }}-RELEASE/base.txz dest=/root/base.txz
+  with_items:
+      - "{{ freebsd_release }}"
+
 - name:  deploy jail networking rc template
   template: src=network.j2 dest=/etc/rc.conf.d/network
   notify:

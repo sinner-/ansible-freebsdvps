@@ -1,12 +1,11 @@
 # ansible-freebsdvps
-Building on the work from https://github.com/sinner-/freebsdfun
-this is an ansible project to manage a VM based FreeBSD VPS.
+Building on the work from https://github.com/sinner-/freebsdfun this is an ansible project to manage a VM based FreeBSD VPS.
 
 ## Goals
 * Manage PF based firewall.
 * Manage OpenVPN based VPN.
   * Provide VPN default gateway functionality.
-* TODO: Manage server jails:
+* Manage server jails:
   * squid web proxy jail.
   * BIND DNS jail.
   * TODO: postfix MTA jail.
@@ -56,7 +55,8 @@ this is an ansible project to manage a VM based FreeBSD VPS.
   * `search local`
 * Run playbook
 * On master, run:
-  * `export http_proxy="http://squid:3128`
-  * `freebsd-update -b /jailhome/jailname fetch`
-  * `freebsd-update -b /jailhome/jailname install`
-  * `pkg -j jailname update`
+  * `export http_proxy="http://squid:3128"`
+  * `export JAIL=jailname`
+  * `freebsd-update -b /jailhome/$JAIL fetch`
+  * `freebsd-update -b /jailhome/$JAIL install`
+  * `pkg -j $JAIL update`

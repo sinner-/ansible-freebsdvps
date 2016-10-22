@@ -1,0 +1,21 @@
+---
+- name: bootstrap VPS
+  hosts: master
+  remote_user: root
+  gather_facts: false
+  roles:
+    - bootstrap
+
+- name: configure OpenVPN
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - openvpn
+
+- name: configure PF firewall
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - pf

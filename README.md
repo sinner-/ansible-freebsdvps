@@ -31,7 +31,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * `roles/openvpn/templates/certificates/tls-auth.pem`
   * Make sure you have also generated and signed client certificates.
 * Run the playbook with the "bootstrap" tag:
-  * `ansible-playbook -i hosts site.yml --tags bootstrap`.
+  * `ansible-playbook -i hosts bootstrap.yml`.
 
 ## Normal runs
 * Once first run is complete, the SSH port is only accessible via VPN.

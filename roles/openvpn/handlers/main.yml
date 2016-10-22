@@ -1,2 +1,2 @@
 - name: restart OpenVPN
-  service: name=openvpn status=restarted
+  service: name=openvpn state=restarted

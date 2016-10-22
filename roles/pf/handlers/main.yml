@@ -1,2 +1,2 @@
 - name: restart PF
-  service: name=pf status=restarted
+  service: name=pf state=restarted

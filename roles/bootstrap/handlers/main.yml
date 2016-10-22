@@ -2,4 +2,4 @@
   service: name=sshd state=restarted
 
 - name: restart syslogd
-  command: name=syslogd state=restarted
+  service: name=syslogd state=restarted

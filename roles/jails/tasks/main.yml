@@ -47,6 +47,12 @@
   notify:
     - restart jails
 
+- name: disable sendmail in rc.conf
+  lineinfile: dest=/jailhome/{{ item }}/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"NONE\"'
+  with_items: "{{ jails }}"
+  notify:
+    - restart jails
+
 - name: add master alias to jail /etc/mail/aliases
   lineinfile: dest=/jailhome/{{ item }}/etc/mail/aliases regexp="^root:" line="root{{':'}} root@master.local"
   with_items: "{{ jails }}"

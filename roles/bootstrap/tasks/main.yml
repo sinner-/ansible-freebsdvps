@@ -19,7 +19,7 @@
   notify: restart SSH daemon
 
 - name: disable sendmail in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"NO\"'
+  lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"NONE\"'
 
 - name: stop sendmail service
   service: name=sendmail state=stopped

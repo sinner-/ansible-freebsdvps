@@ -1,0 +1,33 @@
+queue_directory = /var/spool/postfix
+command_directory = /usr/local/sbin
+daemon_directory = /usr/local/libexec/postfix
+data_directory = /var/db/postfix
+mail_owner = postfix
+myhostname = sina.id.au
+mydomain = sina.id.au
+myorigin = $mydomain
+mydestination = $myhostname, $mydomain, localhost, master.local
+unknown_local_recipient_reject_code = 550
+mynetworks_style = host
+relay_domains = $mydestination, 127.0.0.1
+debug_peer_level = 2
+debugger_command =
+   PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+   ddd $daemon_directory/$process_name $process_id & sleep 5
+sendmail_path = /usr/local/sbin/sendmail
+newaliases_path = /usr/local/bin/newaliases
+mailq_path = /usr/local/bin/mailq
+setgid_group = maildrop
+html_directory = /usr/local/share/doc/postfix
+manpage_directory = /usr/local/man
+sample_directory = /usr/local/etc/postfix
+readme_directory = /usr/local/share/doc/postfix
+inet_protocols = ipv4
+smtpd_recipient_restrictions =
+  reject_rbl_client zen.spamhaus.org,
+  reject_rbl_client bl.spamcop.net,
+  permit
+#smtpd_tls_cert_file = /usr/local/etc/postfix/ssl/sina.id.au-cert.pem
+#smtpd_tls_key_file = /usr/local/etc/postfix/private/sina.id.au-key.pem
+#smtpd_tls_CAfile = /usr/local/etc/postfix/ssl/godaddy-bundle.pem
+#smtpd_tls_security_level = encrypt

@@ -27,5 +27,5 @@
 - name: disable resolvconf
   copy: src=resolvconf.conf dest=/etc/resolvconf.conf
 
-- name: install custom resolv.conf
-  copy: src=resolv.conf dest=/etc/resolv.conf
+- name: deploy custom resolv.conf template
+  template: src=resolv.conf.j2 dest=/etc/resolv.conf

@@ -5,18 +5,18 @@ mount.devfs = true;
 
 squid {
   host.hostname="squid.local";
-  ip4.addr="{{ jail_bridge_subnet }}.10";
+  ip4.addr="{{ jail_bridge_subnet }}.{{ squid_ip }}";
   path="/jailhome/squid";
 }
 
 dns {
   host.hostname="dns.local";
-  ip4.addr="{{ jail_bridge_subnet }}.11";
+  ip4.addr="{{ jail_bridge_subnet }}.{{ dns_ip }}";
   path="/jailhome/dns";
 }
 
 www { 
   host.hostname="www.local";
-  ip4.addr="{{ jail_bridge_subnet }}.14";
+  ip4.addr="{{ jail_bridge_subnet }}.{{ www_ip }}";
   path="/jailhome/www";
 }

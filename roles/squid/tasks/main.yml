@@ -1,6 +1,6 @@
 ---
-- name: install google DNS resolv.conf
-  copy: src=resolv.conf dest=/jailhome/squid/etc/resolv.conf
+- name: deploy local resolv.conf template
+  template: src=resolv.conf.j2 dest=/jailhome/squid/etc/resolv.conf
 
 - name: install squid
   command: pkg -j squid install -y squid

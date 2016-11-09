@@ -1,13 +1,13 @@
 ---
-- name: install google DNS resolv.conf
-  copy: src=resolv.conf dest=/jailhome/dns/etc/resolv.conf
+- name: deploy local resolv.conf template
+  template: src=resolv.conf.j2 dest=/jailhome/dns/etc/resolv.conf
 
 - name: install bind
   command: pkg -j dns install -y bind910
   args:
     creates: /jailhome/dns/usr/local/sbin/named
   environment:
-    http_proxy: http://{{ jail_bridge_subnet}}.10:3128/
+    http_proxy: http://{{ jail_bridge_subnet}}.{{ squid_ip }}:3128/
 
 - name: enable named in rc.conf
   lineinfile: dest=/jailhome/dns/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"

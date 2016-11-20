@@ -21,8 +21,8 @@
   template: src=main.cf.j2 dest=/usr/local/etc/postfix/main.cf
               owner=root group=wheel mode=0644
   notify:
-    - restart postfix
     - postmap main.cf
+    - restart postfix
 
 - name: run newaliases
   command: /usr/bin/newaliases

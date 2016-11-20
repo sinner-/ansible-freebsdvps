@@ -13,9 +13,13 @@
   notify: 
     - restart syslogd
 
+- name: disable syslogd socket
+  lineinfile: dest=/etc/rc.conf regexp='^syslogd_flags=' line='syslogd_flags=\"-ss\"'
+  notify:
+    - restart syslogd
+
 - name: copy SSH daemon configuration
-  copy: src=sshd_config dest=/etc/ssh/sshd_config
-          owner=root group=wheel mode=0644
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=wheel mode=0644
   notify: restart SSH daemon
 
 - name: disable sendmail in rc.conf

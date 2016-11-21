@@ -2,6 +2,9 @@ local {{ ansible_default_ipv4.address }}
 port 1194
 proto udp
 dev tun
+cipher AES-256-CBC
+auth SHA512
+tls-version-min 1.2
 ca /usr/local/etc/openvpn/ssl/cacert.pem
 cert /usr/local/etc/openvpn/ssl/openvpncert.pem
 key /usr/local/etc/openvpn/ssl/private/openvpnkey.pem  # This file should be kept secret

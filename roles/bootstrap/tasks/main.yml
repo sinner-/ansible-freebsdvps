@@ -2,7 +2,7 @@
 - name: update FreeBSD repository catalogue
   raw: /usr/sbin/pkg update
 
-- name: install Python 
+- name: install Python
   raw: /usr/sbin/pkg install -y python
 
 - name: set live hostname to master
@@ -10,7 +10,7 @@
 
 - name: set configured hostname to master
   lineinfile: dest=/etc/rc.conf regexp=^hostname= line=hostname=master
-  notify: 
+  notify:
     - restart syslogd
 
 - name: disable syslogd socket

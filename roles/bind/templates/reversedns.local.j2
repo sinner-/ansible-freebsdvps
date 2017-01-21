@@ -6,9 +6,9 @@ $TTL 3600 ;1h TTL
                                 604800          ; Expire
                                 300             ; Negative Response TTL
                         )
- 
+
 {{ jail_bridge_subnet.split(".")[2] }}.{{ jail_bridge_subnet.split(".")[1] }}.{{ jail_bridge_subnet.split(".")[0] }}.in-addr.arpa.                IN      NS      dns.local.
- 
+
 {{ master_ip }}		 IN      PTR     master.local.
 {{ squid_ip }}               IN      PTR     squid.local.
 {{ dns_ip }}               IN      PTR     dns.local.

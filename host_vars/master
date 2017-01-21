@@ -7,7 +7,9 @@ jails:
  - squid
  - dns
  - www
+ - cal
 master_ip: 9
 squid_ip: 10
 dns_ip: 11
 www_ip: 12
+cal_ip: 13

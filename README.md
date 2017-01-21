@@ -10,6 +10,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * squid web proxy jail.
   * BIND DNS jail.
   * nginx jail.
+  * radicale CalDAV jail.
 
 ## Bootstrap
 * Boot a FreeBSD 11 VM (tested on FreeBSD 11.0)

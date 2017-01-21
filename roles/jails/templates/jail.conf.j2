@@ -20,3 +20,9 @@ www {
   ip4.addr="{{ jail_bridge_subnet }}.{{ www_ip }}";
   path="/jailhome/www";
 }
+
+cal {
+  host.hostname="cal.local";
+  ip4.addr="{{ jail_bridge_subnet }}.{{ cal_ip }}";
+  path="/jailhome/cal";
+}

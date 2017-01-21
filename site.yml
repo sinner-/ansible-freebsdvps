@@ -61,3 +61,10 @@
   gather_facts: true
   roles:
     - { role: nginx, tags: ['nginx'] }
+
+- name: configure radicale
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - { role: radicale, tags: ['radicale'] }

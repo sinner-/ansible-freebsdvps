@@ -4,6 +4,11 @@
   with_items:
       - "{{ freebsd_release }}"
 
+- name: install gtar
+  command: pkg install -y gtar
+  args:
+    creates: /usr/local/bin/gtar
+
 - name:  deploy jail networking rc template
   template: src=network.j2 dest=/etc/rc.conf.d/network
   notify:

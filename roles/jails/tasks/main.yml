@@ -79,3 +79,7 @@
   with_items: "{{ jails }}"
   notify:
     - restart jails
+
+- name:  deploy periodic.conf.local template to disable unnecessary tasks
+  template: src=periodic.conf.local.j2 dest=/jailhome/{{ item }}/etc/periodic.conf.local
+  with_items: "{{ jails }}"

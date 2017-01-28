@@ -1,2 +1,3 @@
 hosts
 roles/openvpn/templates/certificates
+host_vars/master

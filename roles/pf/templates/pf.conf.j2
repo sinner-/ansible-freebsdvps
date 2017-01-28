@@ -15,7 +15,6 @@ ext_ip="{{ ansible_default_ipv4.address }}"
 set require-order yes
 set block-policy return
 set optimization normal
-set skip on lo
 
 ########################
 ## Traffic normalization
@@ -70,6 +69,9 @@ block out log quick on $ext_if from ! $ext_ip to any
 # them anyway (hence, no return-rst).
 block drop in quick on $ext_if from { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 255.255.255.255/32 } to any
 
+#Isolate inter-jail traffic
+block drop in on lo0 from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.0/24
+
 #Default Deny
 block drop in all
 block drop in inet6 all
@@ -78,12 +80,19 @@ block drop in inet6 all
 pass in on tun0 all
 pass out on tun0 all
 
+#Allow loopback traffic
+pass in on lo0 all
+pass out on lo0 all
+
 #Whitelist
 pass out keep state
 pass in on $ext_if proto tcp from {{ vpn_tun_subnet }}.0/24 to any port ssh flags any
 pass in on $ext_if proto tcp from any to any port http
 pass in on $ext_if proto tcp from any to any port https
 pass in on $ext_if proto udp from any to any port openvpn flags any
+pass in on lo0 proto udp from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.{{ dns_ip }} port domain
+pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.{{ squid_ip }} port 3128
+pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.0/24 port smtp
 
 ## DEBUG:
 ##  LOG Blocked Packets [uncomment above]:

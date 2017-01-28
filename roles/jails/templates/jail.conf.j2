@@ -26,3 +26,9 @@ cal {
   ip4.addr="{{ jail_bridge_subnet }}.{{ cal_ip }}";
   path="/jailhome/cal";
 }
+
+ldap {
+  host.hostname="ldap.local";
+  ip4.addr="{{ jail_bridge_subnet }}.{{ ldap_ip }}";
+  path="/jailhome/ldap";
+}

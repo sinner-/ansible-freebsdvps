@@ -11,6 +11,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * BIND DNS jail.
   * nginx jail.
   * radicale CalDAV jail.
+  * openldap LDAP jail.
 
 ## Bootstrap
 * Boot a FreeBSD 11 VM (tested on FreeBSD 11.0)
@@ -22,6 +23,8 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
 * Copy hosts.example to hosts and change the example IP to your VMs IP:
   * `cp hosts.example hosts`
   * `sed -i 's/1.1.1.1/YOUR_VM_IP/' hosts`
+* Copy host_vars/master.example to host_vars/master
+  * `cp host_vars/master.example host_vars/master`
 * Generate OpenSSL certificates for OpenVPN and copy to:
   * `roles/openvpn/templates/certificates/cacert.pem`
   * `roles/openvpn/templates/certificates/openvpncert.pem`
@@ -40,6 +43,10 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
 * Configure your OpenVPN client and connect to the VM.
 * Now you can run the playbook with no tags:
   * `ansible-playbook -i hosts site.yml`.
+* After a normal run is complete you should use `slappasswd` to generate a password hash and add it to your host_vars/master
+  * `ssh root@10.8.0.1 jexec ldap slappasswd`.
+  * Add the output to `slapd_root` entry in host_vars/master.
+  * Reconfigure ldap jail: `ansible-playbook -i hosts site.yml --tags ldap`.
 
 ## Adding a new jail
 * Edit `host_vars/master` to add the jail name to the jails list and and an IP entry.
@@ -58,3 +65,4 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * `freebsd-update -b /jailhome/$JAIL fetch`
   * `freebsd-update -b /jailhome/$JAIL install`
   * `pkg -j $JAIL update`
+  * `jail -r $JAIL ; jail -cmr $JAIL`

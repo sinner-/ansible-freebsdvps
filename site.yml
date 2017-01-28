@@ -68,3 +68,10 @@
   gather_facts: true
   roles:
     - { role: radicale, tags: ['radicale'] }
+
+- name: configure ldap
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - { role: openldap, tags: ['ldap'] }

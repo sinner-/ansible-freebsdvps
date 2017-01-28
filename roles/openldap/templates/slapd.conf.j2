@@ -1,0 +1,18 @@
+include     /usr/local/etc/openldap/schema/core.schema
+include     /usr/local/etc/openldap/schema/cosine.schema
+include     /usr/local/etc/openldap/schema/inetorgperson.schema
+pidfile     /var/run/openldap/slapd.pid
+argsfile    /var/run/openldap/slapd.args
+modulepath  /usr/local/libexec/openldap
+moduleload  back_mdb
+database    mdb
+maxsize     1073741824
+suffix      "ou=root,dc=local"
+rootdn      "cn=ldaproot,ou=admin,ou=root,dc=local"
+rootpw      {{ slapd_rootpw }}
+directory   /var/db/openldap-data
+index       objectClass eq
+access to *
+    by self write
+    by users read
+    by anonymous auth

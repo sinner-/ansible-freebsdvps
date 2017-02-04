@@ -18,5 +18,5 @@
 
 - name: deploy slapd.conf template
   template: src=slapd.conf.j2 dest=/jailhome/ldap/usr/local/etc/openldap/slapd.conf
-                owner=root group=wheel mode=0644
+                owner=389 group=389 mode=0644
   notify: restart slapd

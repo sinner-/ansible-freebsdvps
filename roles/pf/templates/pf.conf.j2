@@ -93,6 +93,8 @@ pass in on $ext_if proto udp from any to any port openvpn flags any
 pass in on lo0 proto udp from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.{{ dns_ip }} port domain
 pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.{{ squid_ip }} port 3128
 pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.0/24 port smtp
+pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ cal_ip }} to {{ jail_bridge_subnet }}.{{ ldap_ip }} port ldap
+pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ ldap_ip }} to {{ jail_bridge_subnet }}.{{ ldap_ip }} port ldap
 
 ## DEBUG:
 ##  LOG Blocked Packets [uncomment above]:

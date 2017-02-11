@@ -3,7 +3,7 @@
   template: src=resolv.conf.j2 dest=/jailhome/cal/etc/resolv.conf
 
 - name: install radicale
-  command: pkg -j cal install -y py27-radicale
+  command: pkg -j cal install -y py27-radicale py27-ldap
   args:
     creates: /jailhome/cal/usr/local/etc/radicale/config
   environment:
@@ -14,10 +14,5 @@
 
 - name: deploy radicale config template
   template: src=config.j2 dest=/jailhome/cal/usr/local/etc/radicale/config
-              owner=root group=wheel mode=0644
-  notify: restart radicale
-
-- name: deploy radicale htpasswd
-  template: src=htpasswd.j2 dest=/jailhome/cal/usr/local/etc/radicale/users
               owner=root group=wheel mode=0644
   notify: restart radicale

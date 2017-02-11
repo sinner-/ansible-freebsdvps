@@ -12,6 +12,8 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * nginx jail.
   * radicale CalDAV jail.
   * openldap LDAP jail.
+* Unified authentication:
+  * radicale uses LDAP.
 
 ## Bootstrap
 * Boot a FreeBSD 11 VM (tested on FreeBSD 11.0)

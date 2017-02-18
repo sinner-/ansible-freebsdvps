@@ -3,10 +3,10 @@ command_directory = /usr/local/sbin
 daemon_directory = /usr/local/libexec/postfix
 data_directory = /var/db/postfix
 mail_owner = postfix
-myhostname = sina.id.au
-mydomain = sina.id.au
-myorigin = $mydomain
-mydestination = $myhostname, $mydomain, localhost, {% for jail in jails %} {{ jail }}.{{ vpn_dns_search }}, {% endfor %} master.{{ vpn_dns_search }}
+myhostname = {{ external_domain }}
+mydomain = $myhostname
+myorigin = $myhostname
+mydestination = $mydomain
 unknown_local_recipient_reject_code = 550
 mynetworks_style = host
 relay_domains = $mydestination, 127.0.0.1
@@ -23,6 +23,8 @@ manpage_directory = /usr/local/man
 sample_directory = /usr/local/etc/postfix
 readme_directory = /usr/local/share/doc/postfix
 inet_protocols = ipv4
+compatibility_level = 2
+alias_maps = hash:/etc/aliases, ldap:/etc/postfix/ldap-aliases.cf
 smtpd_recipient_restrictions =
   reject_rbl_client zen.spamhaus.org,
   reject_rbl_client bl.spamcop.net,

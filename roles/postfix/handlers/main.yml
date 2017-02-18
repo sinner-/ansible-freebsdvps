@@ -1,5 +1,5 @@
 - name: restart postfix
-  service: name=postfix state=restarted
+  command: jexec mail service postfix restart
 
 - name: postmap main.cf
-  command: postmap /usr/local/etc/postfix/main.cf
+  command: jexec mail postmap /usr/local/etc/postfix/main.cf

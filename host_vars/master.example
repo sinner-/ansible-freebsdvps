@@ -4,6 +4,7 @@ vpn_dns_search: local
 ntp_pool: au.pool.ntp.org
 jail_bridge_subnet: 192.168.254
 slapd_rootpw: secret #use slappasswd(8) to generate a proper password!
+external_domain: example.com
 jails:
  - squid
  - dns
@@ -16,3 +17,4 @@ dns_ip: 11
 www_ip: 12
 cal_ip: 13
 ldap_ip: 14
+mail_ip: 15

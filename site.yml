@@ -27,13 +27,6 @@
   roles:
     - { role: ntpd, tags: ['ntpd'] }
 
-- name: configure postfix
-  hosts: master
-  remote_user: root
-  gather_facts: true
-  roles:
-    - { role: postfix, tags: ['postfix'] }
-
 - name: configure jails
   hosts: master
   remote_user: root
@@ -75,3 +68,10 @@
   gather_facts: true
   roles:
     - { role: openldap, tags: ['ldap'] }
+
+- name: configure postfix
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - { role: postfix, tags: ['postfix'] }

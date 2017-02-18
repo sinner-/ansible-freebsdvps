@@ -32,3 +32,9 @@ ldap {
   ip4.addr="{{ jail_bridge_subnet }}.{{ ldap_ip }}";
   path="/jailhome/ldap";
 }
+
+mail {
+  host.hostname="mail.local";
+  ip4.addr="{{ jail_bridge_subnet }}.{{ mail_ip }}";
+  path="/jailhome/mail";
+}

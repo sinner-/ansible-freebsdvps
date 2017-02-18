@@ -2,7 +2,7 @@
 - name: bootstrap VPS
   hosts: master
   remote_user: root
-  gather_facts: false
+  gather_facts: true
   roles:
     - { role: bootstrap, tags: ['bootstrap'] }
 

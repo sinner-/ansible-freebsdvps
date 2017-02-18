@@ -1,0 +1,26 @@
+queue_directory = /var/spool/postfix
+command_directory = /usr/local/sbin
+daemon_directory = /usr/local/libexec/postfix
+data_directory = /var/db/postfix
+mail_owner = postfix
+myhostname = master.{{ vpn_dns_search }}
+mydomain = master.{{ vpn_dns_search }}
+myorigin = $mydomain
+mydestination = $myhostname, $mydomain, localhost, {% for jail in jails %} {{ jail }}.{{ vpn_dns_search }}, {% endfor %} master.{{ vpn_dns_search }}
+unknown_local_recipient_reject_code = 550
+mynetworks_style = host
+relay_domains = $mydestination, 127.0.0.1
+debug_peer_level = 2
+debugger_command =
+   PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+   ddd $daemon_directory/$process_name $process_id & sleep 5
+sendmail_path = /usr/local/sbin/sendmail
+newaliases_path = /usr/local/bin/newaliases
+mailq_path = /usr/local/bin/mailq
+setgid_group = maildrop
+html_directory = /usr/local/share/doc/postfix
+manpage_directory = /usr/local/man
+sample_directory = /usr/local/etc/postfix
+readme_directory = /usr/local/share/doc/postfix
+inet_protocols = ipv4
+compatibility_level = 2

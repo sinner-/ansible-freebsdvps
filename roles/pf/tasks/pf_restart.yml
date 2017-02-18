@@ -1,0 +1,12 @@
+---
+- name: check pf status
+  command: service pf onestatus
+  register: result
+
+- name: start pf
+  service: name=pf state=started
+  when: "result.rc != 0"
+
+- name: reload pf
+  service: name=pf state=reloaded
+  when: "result.rc == 0"

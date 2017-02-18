@@ -36,6 +36,11 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * Make sure you have also generated and signed client certificates.
 * Run the playbook with the "bootstrap" tag:
   * `ansible-playbook -i hosts bootstrap.yml`.
+* It's not required, but the following set of commands are recommended
+  * SSH into the bootstrapped VM with `ssh root@10.8.0.1`.
+  * `freebsd-update fetch`
+  * `freebsd-update install`
+  * `reboot`
 
 ## Normal runs
 * Once first run is complete, the SSH port is only accessible via VPN.

@@ -1,0 +1,7 @@
+---
+- name: ensure /root/.ssh directory exists
+  file: path=/root/.ssh state=directory owner=root group=wheel mode=0600
+
+- name: deploy SSH authorized_keys template
+  template: src=authorized_keys.j2 dest=/root/.ssh/authorized_keys
+              owner=root group=wheel mode=0600

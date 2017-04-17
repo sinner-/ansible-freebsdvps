@@ -4,26 +4,10 @@ options {
 	dump-file	"/var/dump/named_dump.db";
 	statistics-file	"/var/stats/named.stats";
 	forwarders {
-		8.8.4.4;
-		8.8.8.8;
+		{{ dns_upstream_primary }};
+		{{ dns_upstream_secondary }};
 	};
 	allow-query { {{ vpn_tun_subnet }}.0/24; {{ jail_bridge_subnet }}.0/24; };
-};
-zone "." {
-	type slave;
-	file "/usr/local/etc/namedb/slave/root.slave";
-	masters {
-		192.5.5.241;	// F.ROOT-SERVERS.NET.
-	};
-	notify no;
-};
-zone "arpa" {
-	type slave;
-	file "/usr/local/etc/namedb/slave/arpa.slave";
-	masters {
-		192.5.5.241;	// F.ROOT-SERVERS.NET.
-	};
-	notify no;
 };
 
 controls { };

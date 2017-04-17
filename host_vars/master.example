@@ -5,6 +5,8 @@ ntp_pool: au.pool.ntp.org
 jail_bridge_subnet: 192.168.254
 slapd_rootpw: secret #use slappasswd(8) to generate a proper password!
 external_domain: example.com
+dns_upstream_primary: 208.67.222.222
+dns_upstream_secondary: 208.67.220.220
 jails:
  - squid
  - dns

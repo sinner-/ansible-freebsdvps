@@ -13,6 +13,7 @@ jails:
  - www
  - cal
  - ldap
+ - mail
 master_ip: 9
 squid_ip: 10
 dns_ip: 11
@@ -22,4 +23,3 @@ ldap_ip: 14
 mail_ip: 15
 ssh_keys:
  - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4oU3wv4audikXJRPX3smotYThiznF4MG4APGY4alWcaEfTstkQozKE956qLtbkVA3VXf7OWkVkb75bb9RgNlu9DFrf3vn30O++4Dy9Q8de+Rwc3h068/XlDMolmXzcBm6jcdE+N1F+Ec+nc6Op/6GKL54kZYoXLd3V8roW4kO2vbPHi+NLjgw92aiXHUrrUfqETHh5h+3HoIZN+kZeZuIayj2KAIJZ+d+PzIzOzzc4P1UflZkrkiewq0vrla7uDLldB0yC4gLS5p83aom55NcknrC05GQOHNVTY26nf3pIPstnrXEEfeopg9t0awtAJckchO6ZKVtwfH+XWOBXu7lQ== sina@sina-laptop
- - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcmXsrFbKlYHBW6ZRNepqzeALXmAuSb70CHvMJK2eHBGsEfICJkW7oNTahWGYo6LnToXkLq2xmii+qYuuNONt6sjqvuAQmZ6ZQa9zslNwnNlXD9c9BCGddLUL5Qb7TKbqwUb6xdFvQNr+dGAxGTSeUoNLSTSQezJredPqmasiT/Z+LKQpREBRq7WZFTG5AsU7iu1M9jTTRLEZsMOIIfzORTX55uaQFL/2Qu7Uzb62upFEqznv+JqIg0RY0aKQydAy6U4uty08luUuR64gvLNn8y4WHPUb3XahcXNJbjXfO7hDOSRiKyyP67jqOgwJirj4XCkt78JFx2JCJj+ugKph7 sina@sina-laptop

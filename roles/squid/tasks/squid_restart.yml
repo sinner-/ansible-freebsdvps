@@ -2,6 +2,7 @@
 - name: check squid status
   command: jexec squid service squid onestatus
   register: result
+  ignore_errors: True
 
 - name: start squid
   command: jexec squid service squid start

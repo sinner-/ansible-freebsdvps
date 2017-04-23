@@ -2,6 +2,7 @@
 - name: check pf status
   command: service pf onestatus
   register: result
+  ignore_errors: True
 
 - name: start pf
   service: name=pf state=started

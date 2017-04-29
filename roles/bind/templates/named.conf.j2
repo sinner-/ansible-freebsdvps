@@ -3,14 +3,28 @@ options {
 	pid-file	"/var/run/named/pid";
 	dump-file	"/var/dump/named_dump.db";
 	statistics-file	"/var/stats/named.stats";
-	forwarders {
-		{{ dns_upstream_primary }};
-		{{ dns_upstream_secondary }};
-	};
 	allow-query { {{ vpn_tun_subnet }}.0/24; {{ jail_bridge_subnet }}.0/24; };
 };
 
 controls { };
+
+zone "." {
+    type slave;
+    file "/usr/local/etc/namedb/slave/root.slave";
+    masters {
+        192.0.32.132; //192.0.32.132
+    };
+    notify no;
+};
+
+zone "arpa" {
+    type slave;
+    file "/usr/local/etc/namedb/slave/arpa.slave";
+    masters {
+        192.0.32.132; //192.0.32.132
+    };
+    notify no;
+};
 
 zone "localhost"	{ type master; file "/usr/local/etc/namedb/master/localhost-forward.db"; };
 zone "127.in-addr.arpa"	{ type master; file "/usr/local/etc/namedb/master/localhost-reverse.db"; };

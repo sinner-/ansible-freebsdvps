@@ -15,5 +15,18 @@ http {
             root /usr/local/www/sina.id.au;
         }
 
+        location /git {
+            gzip off;
+            alias /usr/local/www/cgit;
+            try_files $uri @cgit;
+        }
+
+        location @cgit {
+            fastcgi_pass unix:/var/run/fcgiwrap/cgit.sock;
+            fastcgi_split_path_info ^(/git)(/?.+)$;
+            fastcgi_param SCRIPT_NAME /cgit.cgi$fastcgi_path_info;
+            fastcgi_param DOCUMENT_ROOT /usr/local/www/cgit;
+        }
+
     }
 }

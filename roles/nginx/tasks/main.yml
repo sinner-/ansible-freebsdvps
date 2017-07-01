@@ -16,3 +16,6 @@
   template: src=nginx.conf.j2 dest=/jailhome/www/usr/local/etc/nginx/nginx.conf
               owner=root group=wheel mode=0644
   notify: restart nginx
+
+- include: fcgiwrap.yml
+- include: cgit.yml

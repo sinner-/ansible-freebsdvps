@@ -1,2 +1,4 @@
 - name: restart nginx
   command: jexec www service nginx restart
+- name: restart fcgiwrap
+  command: jexec www service fcgiwrap restart

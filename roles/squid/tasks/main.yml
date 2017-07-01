@@ -1,25 +1,25 @@
 ---
 - name: deploy local resolv.conf template
-  template: src=resolv.conf.j2 dest=/jailhome/squid/etc/resolv.conf
+  template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
 
 - name: install squid
-  command: pkg -j squid install -y squid
+  command: pkg -j {{ jailname }} install -y squid
   args:
-    creates: /jailhome/squid/usr/local/sbin/squid
+    creates: /{{ jailhome }}/usr/local/sbin/squid
 
 - name: deploy squid newsyslog.conf template
-  template: src=newsyslog.conf.j2 dest=/jailhome/squid/etc/newsyslog.conf.d/squid.conf
+  template: src=newsyslog.conf.j2 dest={{ jailhome }}/etc/newsyslog.conf.d/squid.conf
 
 - name: deploy squid.conf template
-  template: src=squid.conf.j2 dest=/jailhome/squid/usr/local/etc/squid/squid.conf
+  template: src=squid.conf.j2 dest={{ jailhome }}/usr/local/etc/squid/squid.conf
   notify: restart squid
 
 - name: initialise squid cache
-  command: jexec squid squid -z
+  command: jexec {{ jailname }} squid -z
   args:
-    creates: /jailhome/squid/var/squid/cache/00
+    creates: /{{ jailhome }}/var/squid/cache/00
   notify: restart squid
 
 - name: enable squid in rc.conf
-  lineinfile: dest=/jailhome/squid/etc/rc.conf regexp=^squid_enable= line=squid_enable=\"YES\"
+  lineinfile: dest={{ jailhome }}/etc/rc.conf regexp=^squid_enable= line=squid_enable=\"YES\"
   notify: restart squid

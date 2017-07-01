@@ -1,13 +1,13 @@
 ---
 - name: check squid status
-  command: jexec squid service squid onestatus
+  command: jexec {{ jailname }} service squid onestatus
   register: result
   ignore_errors: True
 
 - name: start squid
-  command: jexec squid service squid start
+  command: jexec {{ jailname }} service squid start
   when: "result.rc != 0"
 
 - name: reload squid
-  command: jexec squid service squid reload
+  command: jexec {{ jailname }} service squid reload
   when: "result.rc == 0"

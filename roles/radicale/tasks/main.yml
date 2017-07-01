@@ -1,18 +1,18 @@
 ---
 - name: deploy local resolv.conf template
-  template: src=resolv.conf.j2 dest=/jailhome/cal/etc/resolv.conf
+  template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
 
 - name: install radicale
-  command: pkg -j cal install -y py27-radicale py27-ldap
+  command: pkg -j {{ jailname }} install -y py27-radicale py27-ldap
   args:
-    creates: /jailhome/cal/usr/local/etc/radicale/config
+    creates: /{{ jailhome }}/usr/local/etc/radicale/config
   environment:
     http_proxy: http://squid:3128/
 
 - name: enable radicale in rc.conf
-  lineinfile: dest=/jailhome/cal/etc/rc.conf regexp=^radicale_enable= line=radicale_enable=\"YES\"
+  lineinfile: dest={{ jailhome }}/etc/rc.conf regexp=^radicale_enable= line=radicale_enable=\"YES\"
 
 - name: deploy radicale config template
-  template: src=config.j2 dest=/jailhome/cal/usr/local/etc/radicale/config
+  template: src=config.j2 dest={{ jailhome }}/usr/local/etc/radicale/config
               owner=root group=wheel mode=0644
   notify: restart radicale

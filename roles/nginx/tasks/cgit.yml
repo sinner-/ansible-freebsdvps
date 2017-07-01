@@ -1,11 +1,11 @@
 ---
 - name: install cgit
-  command: pkg -j www install -y cgit
+  command: pkg -j {{ jailname }} install -y cgit
   args:
-    creates: /jailhome/www/usr/local/www/cgit/cgit.cgi
+    creates: /{{ jailhome }}/usr/local/www/cgit/cgit.cgi
   environment:
     http_proxy: http://squid:3128/
 
 - name: deploy cgitrc template
-  template: src=cgitrc.j2 dest=/jailhome/www/usr/local/etc/cgitrc
+  template: src=cgitrc.j2 dest={{ jailhome }}/usr/local/etc/cgitrc
               owner=root group=wheel mode=0644

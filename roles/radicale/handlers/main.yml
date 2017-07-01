@@ -1,2 +1,2 @@
 - name: restart radicale
-  command: jexec cal service radicale restart
+  command: jexec {{ jailname }} service radicale restart

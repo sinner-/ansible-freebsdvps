@@ -1,28 +1,28 @@
 ---
 - name: deploy local resolv.conf template
-  template: src=resolv.conf.j2 dest=/jailhome/dns/etc/resolv.conf
+  template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
 
 - name: install bind
-  command: pkg -j dns install -y bind910
+  command: pkg -j {{ jailname }} install -y bind910
   args:
-    creates: /jailhome/dns/usr/local/sbin/named
+    creates: /{{ jailhome }}/usr/local/sbin/named
   environment:
     http_proxy: http://{{ jail_bridge_subnet}}.{{ squid_ip }}:3128/
 
 - name: enable named in rc.conf
-  lineinfile: dest=/jailhome/dns/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"
+  lineinfile: dest={{ jailhome }}/etc/rc.conf regexp=^named_enable= line=named_enable=\"YES\"
 
 - name: deploy named.conf template
-  template: src=named.conf.j2 dest=/jailhome/dns/usr/local/etc/namedb/named.conf
+  template: src=named.conf.j2 dest={{ jailhome }}/usr/local/etc/namedb/named.conf
               owner=root group=wheel mode=0644
   notify: restart named
 
 - name: deploy local DNS zone
-  template: src=dns.local.j2 dest=/jailhome/dns/usr/local/etc/namedb/master/dns.local
+  template: src=dns.local.j2 dest={{ jailhome }}/usr/local/etc/namedb/master/dns.local
               owner=root group=wheel mode=0644
   notify: restart named
 
 - name: deploy local reverse DNS template
-  template: src=reversedns.local.j2 dest=/jailhome/dns/usr/local/etc/namedb/master/reversedns.local
+  template: src=reversedns.local.j2 dest={{ jailhome }}/usr/local/etc/namedb/master/reversedns.local
               owner=root group=wheel mode=0644
   notify: restart named

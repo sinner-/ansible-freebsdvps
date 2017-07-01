@@ -1,12 +1,12 @@
 ---
 - name: install fcgiwrap
-  command: pkg -j www install -y fcgiwrap
+  command: pkg -j {{ jailname }} install -y fcgiwrap
   args:
-      creates: /jailhome/www/usr/local/sbin/fcgiwrap
+      creates: /{{ jailhome }}/usr/local/sbin/fcgiwrap
   environment:
       http_proxy: http://squid:3128
 
 - name: deploy fcgiwrap rc.conf template
-  template: src=fcgiwrap.j2 dest=/jailhome/www/etc/rc.conf.d/fcgiwrap
+  template: src=fcgiwrap.j2 dest={{ jailhome}}/etc/rc.conf.d/fcgiwrap
               owner=root group=wheel mode=0644
   notify: restart fcgiwrap

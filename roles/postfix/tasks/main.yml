@@ -1,31 +1,31 @@
 ---
 - name: deploy local resolv.conf template
-  template: src=resolv.conf.j2 dest=/jailhome/mail/etc/resolv.conf
+  template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
 
 - name: install postfix
-  command: pkg -j mail install -y postfix
+  command: pkg -j {{ jailname }} install -y postfix
   args:
-    creates: /jailhome/mail/usr/local/sbin/postfix
+    creates: /{{ jailhome }}/usr/local/sbin/postfix
   environment:
     http_proxy: http://squid:3128/
 
 - name: enable postfix in rc.conf
-  lineinfile: dest=/jailhome/mail/etc/rc.conf regexp=^postfix_enable= line=postfix_enable=\"YES\"
+  lineinfile: dest={{ jailhome }}/etc/rc.conf regexp=^postfix_enable= line=postfix_enable=\"YES\"
 
 - name: deploy mailer.conf template
-  template: src=mailer.conf.j2 dest=/jailhome/mail/etc/mail/mailer.conf
+  template: src=mailer.conf.j2 dest={{ jailhome }}/etc/mail/mailer.conf
               owner=root group=wheel mode=0644
 
 - name: deploy postmix main.cf template
-  template: src=main.cf.j2 dest=/jailhome/mail/usr/local/etc/postfix/main.cf
+  template: src=main.cf.j2 dest={{ jailhome }}/usr/local/etc/postfix/main.cf
               owner=root group=wheel mode=0644
   notify:
     - postmap main.cf
     - restart postfix
 
 - name: run postfix newaliases
-  command: /usr/local/bin/newaliases
+  command: jexec {{ jailname }} /usr/local/bin/newaliases
   args:
-    creates: /jailhome/mail/etc/aliases.db
+    creates: /{{ jailhome }}/etc/aliases.db
   notify:
     - restart postfix

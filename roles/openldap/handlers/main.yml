@@ -1,2 +1,2 @@
 - name: restart slapd
-  command: jexec ldap service slapd restart
+  command: jexec {{ jailname }} service slapd restart

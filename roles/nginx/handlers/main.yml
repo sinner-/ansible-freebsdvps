@@ -1,4 +1,4 @@
 - name: restart nginx
-  command: jexec www service nginx restart
+  command: jexec {{ jailname }} service nginx restart
 - name: restart fcgiwrap
-  command: jexec www service fcgiwrap restart
+  command: jexec {{ jailname }} service fcgiwrap restart

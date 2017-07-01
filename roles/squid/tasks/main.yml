@@ -7,6 +7,9 @@
   args:
     creates: /jailhome/squid/usr/local/sbin/squid
 
+- name: deploy squid newsyslog.conf template
+  template: src=newsyslog.conf.j2 dest=/jailhome/squid/etc/newsyslog.conf.d/squid.conf
+
 - name: deploy squid.conf template
   template: src=squid.conf.j2 dest=/jailhome/squid/usr/local/etc/squid/squid.conf
   notify: restart squid

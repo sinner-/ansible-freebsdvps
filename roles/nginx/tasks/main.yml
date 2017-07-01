@@ -12,6 +12,9 @@
 - name: enable nginx in rc.conf
   lineinfile: dest=/jailhome/www/etc/rc.conf regexp=^nginx_enable= line=nginx_enable=\"YES\"
 
+- name: deploy nginx newsyslog.conf template
+  template: src=newsyslog.conf.j2 dest=/jailhome/www/etc/newsyslog.conf.d/nginx.conf
+
 - name: deploy nginx.conf template
   template: src=nginx.conf.j2 dest=/jailhome/www/usr/local/etc/nginx/nginx.conf
               owner=root group=wheel mode=0644

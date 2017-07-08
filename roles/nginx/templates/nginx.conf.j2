@@ -29,4 +29,14 @@ http {
         }
 
     }
+
+    server {
+        listen       80;
+        server_name  paste.sina.id.au;
+
+        location / {
+            proxy_pass http://{{ jail_bridge_subnet }}.{{ www_ip }}:8080/;
+        }
+    }
+
 }

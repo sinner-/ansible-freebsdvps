@@ -101,6 +101,7 @@ pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ cal_ip }} to {{ jail_b
 pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ mail_ip }} to {{ jail_bridge_subnet }}.{{ ldap_ip }} port ldap
 pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ ldap_ip }} to {{ jail_bridge_subnet }}.{{ ldap_ip }} port ldap
 pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ dns_ip }} to {{ jail_bridge_subnet }}.{{ dns_ip }} port rndc
+pass in on lo0 proto tcp from {{ jail_bridge_subnet }}.{{ www_ip }} to {{ jail_bridge_subnet }}.{{ www_ip }} port 8080
 
 ## DEBUG:
 ##  LOG Blocked Packets [uncomment above]:

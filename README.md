@@ -19,7 +19,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * mail jail uses LDAP.
 
 ## Bootstrap
-* Boot a FreeBSD 11 VM (tested on FreeBSD 11.0)
+* Boot a FreeBSD 11 VM (tested on FreeBSD 11.1)
 * Clone a copy of this repository:
   * `git clone https://github.com/sinner-/ansible-freebsdvps`
   * `cd ansible-freebsdvps`

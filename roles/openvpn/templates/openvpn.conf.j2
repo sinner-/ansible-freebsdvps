@@ -24,4 +24,4 @@ verb 3
 push "redirect-gateway def1"
 push "dhcp-option DNS {{ jail_bridge_subnet }}.{{ dns_ip }}"
 push "dhcp-option DOMAIN {{ vpn_dns_search }}"
-push route "{{ jail_bridge_subnet }}.0 255.255.255.0 {{ vpn_tun_subnet }}.1 0"
+push "route {{ jail_bridge_subnet }}.0 255.255.255.0 {{ vpn_tun_subnet }}.1 0"

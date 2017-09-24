@@ -4,18 +4,18 @@
   remote_user: root
   gather_facts: false
   roles:
-    - bootstrap
+    - { role: bootstrap, tags: ['bootstrap'] }
 
 - name: configure OpenVPN
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - openvpn
+    - { role: openvpn, tags: ['openvpn'] }
 
 - name: configure PF firewall
   hosts: master
   remote_user: root
   gather_facts: true
   roles:
-    - pf
+    - { role: pf, tags: ['pf'] }

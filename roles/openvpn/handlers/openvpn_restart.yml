@@ -1,0 +1,13 @@
+---
+- name: check openvpn status
+  command: service openvpn onestatus
+  register: result
+  ignore_errors: True
+
+- name: start openvpn
+  service: name=openvpn state=started
+  when: "result.rc != 0"
+
+- name: reload openvpn
+  service: name=openvpn state=restarted
+  when: "result.rc == 0"

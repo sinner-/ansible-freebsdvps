@@ -3,7 +3,7 @@
   template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
 
 - name: install bind
-  command: pkg -j {{ jailname }} install -y bind910
+  command: pkg -j {{ jailname }} install -y bind911
   args:
     creates: /{{ jailhome }}/usr/local/sbin/named
   environment:

@@ -16,19 +16,16 @@
 - name: deploy periodic.conf.local template
   template: src=periodic.conf.local.j2 dest=/etc/periodic.conf.local
               owner=root group=wheel mode=0644
-  notify: restart postfix
 
 - name: deploy mailer.conf template
   template: src=mailer.conf.j2 dest=/etc/mail/mailer.conf
               owner=root group=wheel mode=0644
-  notify: restart postfix
 
 - name: deploy postmix main.cf template
   template: src=main.cf.j2 dest=/usr/local/etc/postfix/main.cf
               owner=root group=wheel mode=0644
   notify:
     - postmap main.cf
-    - restart postfix
 
 - name: run postfix newaliases
   command: /usr/local/bin/newaliases

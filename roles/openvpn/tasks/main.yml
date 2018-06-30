@@ -17,15 +17,15 @@
 - name: install OpenSSL public certificates
   template: src={{ item }} dest=/usr/local/etc/openvpn/ssl mode=0644
   with_items:
-    - certificates/cacert.pem
-    - certificates/openvpncert.pem
+    - certificates/ca.cert.pem
+    - certificates/openvpn.cert.pem
   notify: restart OpenVPN
 
 - name: install OpenSSL private certificates
   template: src={{ item }} dest=/usr/local/etc/openvpn/ssl/private mode=0600
   with_items:
-    - certificates/openvpnkey.pem
-    - certificates/openvpndh4096.pem
+    - certificates/openvpn.key.pem
+    - certificates/openvpn.dh2048.pem
     - certificates/tls-auth.pem
   notify: restart OpenVPN
 

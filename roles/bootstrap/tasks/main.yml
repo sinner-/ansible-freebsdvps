@@ -20,7 +20,6 @@
 
 - name: copy SSH daemon configuration
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=wheel mode=0644
-  notify: restart SSH daemon
 
 - name: network tuning  in rc.conf
   lineinfile: dest=/etc/rc.conf regexp='^ifconfig_vtnet0=' line='ifconfig_vtnet0=\"dhcp -rxcsum -txcsum -lro -tso4 -tso6 -vlanhwtso\"'

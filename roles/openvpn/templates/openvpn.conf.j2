@@ -5,10 +5,10 @@ dev tun
 cipher AES-256-CBC
 auth SHA512
 tls-version-min 1.2
-ca /usr/local/etc/openvpn/ssl/cacert.pem
-cert /usr/local/etc/openvpn/ssl/openvpncert.pem
-key /usr/local/etc/openvpn/ssl/private/openvpnkey.pem  # This file should be kept secret
-dh /usr/local/etc/openvpn/ssl/private/openvpndh4096.pem
+ca /usr/local/etc/openvpn/ssl/ca.cert.pem
+cert /usr/local/etc/openvpn/ssl/openvpn.cert.pem
+key /usr/local/etc/openvpn/ssl/private/openvpn.key.pem  # This file should be kept secret
+dh /usr/local/etc/openvpn/ssl/private/openvpn.dh2048.pem
 tls-auth /usr/local/etc/openvpn/ssl/private/tls-auth.pem 0 # This file is secret
 topology subnet
 server {{ vpn_tun_subnet }}.0 255.255.255.0

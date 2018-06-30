@@ -19,7 +19,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * mail jail uses LDAP.
 
 ## Bootstrap
-* Boot a FreeBSD 11 VM (tested on FreeBSD 11.1)
+* Boot a FreeBSD 11 VM (tested on FreeBSD 11.2)
 * Clone a copy of this repository:
   * `git clone https://github.com/sinner-/ansible-freebsdvps`
   * `cd ansible-freebsdvps`
@@ -32,15 +32,15 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * `cp host_vars/master.example host_vars/master`
 * Generate OpenSSL certificates for OpenVPN and copy to:
   * `roles/openvpn/templates/certificates/cacert.pem`
-  * `roles/openvpn/templates/certificates/openvpncert.pem`
-  * `roles/openvpn/templates/certificates/openvpnkey.pem`
-  * `roles/openvpn/templates/certificates/openvpndh4096.pem`
+  * `roles/openvpn/templates/certificates/openvpn.cert.pem`
+  * `roles/openvpn/templates/certificates/openvpn.key.pem`
+  * `roles/openvpn/templates/certificates/openvpn.dh2048.pem`
   * `roles/openvpn/templates/certificates/tls-auth.pem`
   * Make sure you have also generated and signed client certificates.
 * Ensure your SSH public key is correct in host_vars/master.
 * Run the playbook with the "bootstrap" playbook:
   * `ansible-playbook -i hosts bootstrap.yml`.
-* It's not required, but the following set of commands are recommended
+  * Configure your VPN client to connect to the new VPN server.
   * SSH into the bootstrapped VM with `ssh root@10.8.0.1`.
   * `freebsd-update fetch`
   * `freebsd-update install`

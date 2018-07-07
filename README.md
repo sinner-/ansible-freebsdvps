@@ -5,7 +5,7 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
 * Manage PF based firewall.
 * Manage OpenVPN based VPN.
   * Provide VPN default gateway functionality.
-* Manage postfix MTA.
+* Manage postfix MTA for jails.
 * Manage server jails:
   * squid web proxy jail.
   * BIND DNS jail.
@@ -16,7 +16,6 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
     * postfix MTA.
 * Unified authentication:
   * radicale uses LDAP.
-  * mail jail uses LDAP.
 
 ## Bootstrap
 * Boot a FreeBSD 11 VM (tested on FreeBSD 11.2)

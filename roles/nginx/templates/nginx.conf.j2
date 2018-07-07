@@ -15,11 +15,11 @@ http {
             root /usr/local/www/sina.id.au;
         }
 
-        if ( $query_string ~ "q") { set $cgit_search_access 0; }
-        if ( $remote_addr ~ 10.8.0. ) { set $cgit_search_access 1; }
+        if ( $query_string ~ "q") { set $trusted_access 0; }
+        if ( $remote_addr ~ {{vpn_tun_subnet}} ) { set $trusted_access 1; }
 
         location /git {
-            if ( $cgit_search_access = 0 ) { return 403; }
+            if ( $trusted_access = 0 ) { return 403; }
             gzip off;
             alias /usr/local/www/cgit;
             try_files $uri @cgit;

@@ -1,0 +1,11 @@
+- name: gitolite compile
+  command:  gitolite compile
+  become: true
+  become_user: git
+  become_method: su
+
+- name: gitolite post compile
+  command:  gitolite trigger POST_COMPILE
+  become: true
+  become_user: git
+  become_method: su

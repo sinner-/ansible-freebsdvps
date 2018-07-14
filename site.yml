@@ -48,6 +48,13 @@
   roles:
     - { role: bind, tags: ['bind'] }
 
+- name: configure gitolite
+  hosts: master
+  remote_user: root
+  gather_facts: true
+  roles:
+    - { role: gitolite, tags: ['gitolite'] }
+
 - name: configure nginx
   hosts: master
   remote_user: root

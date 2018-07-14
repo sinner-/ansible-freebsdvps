@@ -9,3 +9,16 @@
 - name: deploy cgitrc template
   template: src=cgitrc.j2 dest={{ jailhome }}/usr/local/etc/cgitrc
               owner=root group=wheel mode=0644
+
+- name: create gitolite mountpoint
+  file:
+    dest: "{{ jailhome }}/usr/local/www/git"
+    state: directory
+
+- name: mount gitolite repodir
+  mount:
+    name: "{{ jailhome }}/rw/usr/local/www/git"
+    src: /usr/home/git/repositories
+    fstype: nullfs
+    opts: ro
+    state: mounted

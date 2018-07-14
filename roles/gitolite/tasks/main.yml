@@ -1,0 +1,65 @@
+---
+- name: install gitolite
+  command: pkg install -y gitolite
+  args:
+    creates: /usr/local/bin/gitolite
+  environment:
+    http_proxy: http://squid:3128/
+
+- name: create git user
+  user:
+    name: git
+
+- name: gitolite dummy setup
+  command:  gitolite setup -a dummy
+  become: true
+  become_user: git
+  become_method: su
+  args:
+    creates: /usr/home/git/.gitolite
+
+- name: remove dummy cruft
+  file:
+    path: /usr/home/git/{{ item }}
+    state: absent
+  with_items:
+    - repositories/gitolite-admin.git
+    - repositories/testing.git
+    - projects.list
+
+- name: deploy .gitolite.rc template
+  template:
+    src: .gitolite.rc.j2
+    dest: /usr/home/git/.gitolite.rc
+    owner: git
+    group: git
+    mode: 000600
+
+- name: deploy gitolite.conf template
+  template:
+    src: gitolite.conf.j2
+    dest: /usr/home/git/.gitolite/conf/gitolite.conf
+    owner: git
+    group: git
+    mode: 000600
+  notify:
+    - gitolite compile
+    - gitolite post compile
+
+- name: create gitolite keydir
+  file:
+    path: /usr/home/git/.gitolite/keydir
+    state: directory
+    owner: git
+    group: git
+
+- name: gitolite user SSH key
+  copy:
+    content: "{{ item }}"
+    dest: /usr/home/git/.gitolite/keydir/gituser.pub
+    owner: git
+    group: git
+  with_items: "{{ ssh_keys }}"
+  notify:
+    - gitolite compile
+    - gitolite post compile

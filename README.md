@@ -10,10 +10,12 @@ Building on the work from https://github.com/sinner-/freebsdfun this is an ansib
   * squid web proxy jail.
   * BIND DNS jail.
   * nginx jail.
+    * cgit (with gitolite integration)
   * radicale CalDAV jail.
   * openldap LDAP jail.
   * mail jail:
     * postfix MTA.
+  * gitolite.
 * Unified authentication:
   * radicale uses LDAP.
 

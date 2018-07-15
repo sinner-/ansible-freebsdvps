@@ -53,6 +53,14 @@
     owner: git
     group: git
 
+- name: make gitolite repodir world readable
+  file:
+    path: /usr/home/git/repositories
+    state: directory
+    owner: git
+    group: git
+    mode: 000705
+
 - name: gitolite user SSH key
   copy:
     content: "{{ item }}"

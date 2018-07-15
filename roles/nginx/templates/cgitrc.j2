@@ -2,4 +2,7 @@ css=/git/cgit.css
 logo=/git/cgit.png
 robots=noindex, nofollow
 virtual-root=/git
-scan-path=/usr/local/www/git
+{% for repo in repos %}
+repo.url={{ repo }}
+repo.path=/usr/local/www/git/{{ repo }}.git
+{% endfor %}

@@ -33,7 +33,7 @@
     dest: /usr/home/git/.gitolite.rc
     owner: git
     group: git
-    mode: 000600
+    mode: 0600
 
 - name: deploy gitolite.conf template
   template:
@@ -41,7 +41,7 @@
     dest: /usr/home/git/.gitolite/conf/gitolite.conf
     owner: git
     group: git
-    mode: 000600
+    mode: 0600
   notify:
     - gitolite compile
     - gitolite post compile
@@ -59,7 +59,7 @@
     state: directory
     owner: git
     group: git
-    mode: 000705
+    mode: 0705
 
 - name: gitolite user SSH key
   copy:

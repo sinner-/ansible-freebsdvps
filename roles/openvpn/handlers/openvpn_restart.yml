@@ -5,9 +5,13 @@
   ignore_errors: True
 
 - name: start openvpn
-  service: name=openvpn state=started
+  service:
+    name: openvpn
+    state: started
   when: "result.rc != 0"
 
 - name: reload openvpn
-  service: name=openvpn state=restarted
+  service:
+    name: openvpn
+    state: restarted
   when: "result.rc == 0"

@@ -1,6 +1,8 @@
 ---
 - name: download jail base
-  get_url: url=http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/{{ item }}-RELEASE/base.txz dest=/root/base.txz
+  get_url:
+    url: http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/{{ item }}-RELEASE/base.txz
+    dest: /root/base.txz
   with_items:
       - "{{ freebsd_release }}"
 
@@ -10,28 +12,38 @@
     creates: /usr/local/bin/cpdup
 
 - name:  deploy jail networking rc template
-  template: src=network.j2 dest=/etc/rc.conf.d/network
+  template:
+    src: network.j2
+    dest: /etc/rc.conf.d/network
   notify:
     - restart jail bridge
     - restart jails
 
 - name: deploy jail rc template
-  template: src=jail.j2 dest=/etc/rc.conf.d/jail
+  template:
+    src: jail.j2
+    dest: /etc/rc.conf.d/jail
   notify:
     - restart jail bridge
     - restart jails
 
 - name: deploy jail.conf template
-  template: src=jail.conf.j2 dest=/etc/jail.conf
+  template:
+    src: jail.conf.j2
+    dest: /etc/jail.conf
   notify:
     - restart jail bridge
     - restart jails
 
 - name: create jailhome dir
-  file: dest=/jailhome state=directory
+  file:
+    dest: /jailhome
+    state: directory
 
 - name: create jail basedirs
-  file: dest=/jailhome/jailroot/rw/usr state=directory
+  file:
+    dest: /jailhome/jailroot/rw/usr
+    state: directory
 
 - name: extract jail rootdirs
   command: tar -Jxvf /root/base.txz -C /jailhome/jailroot
@@ -45,21 +57,31 @@
     creates: /jailhome/jailroot/rw/{{ item }}
 
 - name: symlink jailroot rw
-  file: src=rw/{{ item }} dest=/jailhome/jailroot/{{ item }} state=link
+  file:
+    src: rw/{{ item }}
+    dest: /jailhome/jailroot/{{ item }}
+    state: link
   with_items: [etc, var, tmp]
 
 - name: symlink jailroot usr/local rw
-  file: src=../rw/usr/local dest=/jailhome/jailroot/usr/local state=link
+  file:
+    src: ../rw/usr/local
+    dest: /jailhome/jailroot/usr/local
+    state: link
 
 - name: create jail mountpoints
-  file: dest=/jailhome/{{ item }}/rw state=directory
+  file:
+    dest: /jailhome/{{ item }}/rw
+    state: directory
   with_items: "{{ jails }}"
   notify:
     - restart jail bridge
     - restart jails
 
 - name: create jail rw dirs
-  file: dest=/jailhome/rw/{{ item }}/usr state=directory
+  file:
+    dest: /jailhome/rw/{{ item }}/usr
+    state: directory
   with_items: "{{ jails }}"
   notify:
     - restart jail bridge
@@ -74,27 +96,47 @@
     creates: /jailhome/rw/{{ item.0 }}/{{ item.1 }}
 
 - name: create jail ro mounts
-  mount: name=/jailhome/{{ item }} src=/jailhome/jailroot fstype=nullfs opts=ro state=mounted
+  mount:
+    name: /jailhome/{{ item }}
+    src: /jailhome/jailroot
+    fstype: nullfs
+    opts: ro
+    state: mounted
   with_items: "{{ jails }}"
 
 - name: create jail rw mounts
-  mount: name=/jailhome/{{ item }}/rw src=/jailhome/rw/{{ item }} fstype=nullfs opts=rw state=mounted
+  mount:
+    name: /jailhome/{{ item }}/rw
+    src: /jailhome/rw/{{ item }}
+    fstype: nullfs
+    opts: rw
+    state: mounted
   with_items: "{{ jails }}"
 
 - name: set jail FQDN
-  lineinfile: dest=/jailhome/{{ item }}/etc/rc.conf regexp=^hostname= line=hostname={{ item }}.local create=yes
+  lineinfile:
+    dest: /jailhome/{{ item }}/etc/rc.conf
+    regexp: ^hostname=
+    line: hostname={{ item }}.local
+    create: yes
   with_items: "{{ jails }}"
   notify:
     - restart jails
 
 - name: disable sendmail in rc.conf
-  lineinfile: dest=/jailhome/{{ item }}/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"NONE\"'
+  lineinfile:
+    dest: /jailhome/{{ item }}/etc/rc.conf
+    regexp: '^sendmail_enable='
+    line: 'sendmail_enable="NONE"'
   with_items: "{{ jails }}"
   notify:
     - restart jails
 
 - name: add master alias to jail /etc/mail/aliases
-  lineinfile: dest=/jailhome/{{ item }}/etc/mail/aliases regexp="^root:" line="root{{':'}} root@master.local"
+  lineinfile:
+    dest: /jailhome/{{ item }}/etc/mail/aliases
+    regexp: "^root:"
+    line: "root{{':'}} root@master.local"
   with_items: "{{ jails }}"
 
 - name: run jail newaliases
@@ -104,17 +146,25 @@
     creates: /jailhome/{{ item }}/etc/mail/aliases.db
 
 - name: lock jail root
-  lineinfile: dest=/jailhome/{{ item }}/etc/master.passwd regexp=^root line="root:*:0:0::0:0:rootuser:/root:/bin/csh" create=yes
+  lineinfile:
+    dest: /jailhome/{{ item }}/etc/master.passwd
+    regexp: ^root
+    line: "root:*:0:0::0:0:rootuser:/root:/bin/csh"
+    create: yes
   with_items: "{{ jails }}"
   notify:
     - restart jails
 
 - name: deploy rc.conf.local overrides
-  copy: src=rc.conf.local dest=/jailhome/{{ item }}/etc/rc.conf.local
+  copy:
+    src: rc.conf.local
+    dest: /jailhome/{{ item }}/etc/rc.conf.local
   with_items: "{{ jails }}"
   notify:
     - restart jails
 
 - name:  deploy periodic.conf.local template to disable unnecessary tasks
-  template: src=periodic.conf.local.j2 dest=/jailhome/{{ item }}/etc/periodic.conf.local
+  template:
+    src: periodic.conf.local.j2
+    dest: /jailhome/{{ item }}/etc/periodic.conf.local
   with_items: "{{ jails }}"

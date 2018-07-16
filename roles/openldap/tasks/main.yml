@@ -1,27 +1,39 @@
 ---
 - name: deploy local resolv.conf template
-  template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: "{{ jailhome }}/etc/resolv.conf"
 
 - name: install openldap
   command: pkg -j {{ jailname }} install -y openldap-server
   args:
-    creates: /{{ jailhome }}/usr/local/libexec/slapd
+    creates: "{{ jailhome }}/usr/local/libexec/slapd"
   environment:
     http_proxy: http://squid:3128/
 
 - name: enable slapd in rc.conf
-  lineinfile: dest={{ jailhome }}/etc/rc.conf regexp=^slapd_enable= line=slapd_enable=\"YES\"
+  lineinfile:
+    dest: "{{ jailhome }}/etc/rc.conf"
+    regexp: ^slapd_enable=
+    line: slapd_enable="YES"
 
 - name: deploy openldap.conf template
-  template: src=ldap.conf.j2 dest={{ jailhome }}/usr/local/etc/openldap/ldap.conf
-                owner=root group=wheel mode=0644
+  template:
+    src: ldap.conf.j2
+    dest: "{{ jailhome }}/usr/local/etc/openldap/ldap.conf"
 
 - name: deploy slapd.conf template
-  template: src=slapd.conf.j2 dest={{ jailhome }}/usr/local/etc/openldap/slapd.conf
-                owner=389 group=389 mode=0644
+  template:
+    src: slapd.conf.j2
+    dest: "{{ jailhome }}/usr/local/etc/openldap/slapd.conf"
+    owner: 389
+    group: 389
   notify: restart slapd
 
 - name: deploy postfix schema template
-  template: src=postfix.schema.j2 dest={{ jailhome }}/usr/local/etc/openldap/schema/postfix.schema
-                owner=389 group=389 mode=0644
+  template:
+    src: postfix.schema.j2
+    dest: "{{ jailhome }}/usr/local/etc/openldap/schema/postfix.schema"
+    owner: 389
+    group: 389
   notify: restart slapd

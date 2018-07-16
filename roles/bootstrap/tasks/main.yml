@@ -6,29 +6,45 @@
   raw: /usr/sbin/pkg install -y python
 
 - name: set live hostname to master
-  hostname: name=master
+  hostname:
+    name: master
 
 - name: set configured hostname to master
-  lineinfile: dest=/etc/rc.conf regexp=^hostname= line=hostname=master
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^hostname=
+    line: hostname=master
   notify:
     - restart syslogd
 
 - name: disable syslogd socket
-  lineinfile: dest=/etc/rc.conf regexp='^syslogd_flags=' line='syslogd_flags=\"-ss\"'
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: '^syslogd_flags='
+    line: 'syslogd_flags="-ss"'
   notify:
     - restart syslogd
 
 - name: copy SSH daemon configuration
-  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=wheel mode=0644
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
 
-- name: network tuning  in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp='^ifconfig_vtnet0=' line='ifconfig_vtnet0=\"dhcp -rxcsum -txcsum -lro -tso4 -tso6 -vlanhwtso\"'
+- name: network tuning in rc.conf
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: '^ifconfig_vtnet0='
+    line: 'ifconfig_vtnet0="dhcp -rxcsum -txcsum -lro -tso4 -tso6 -vlanhwtso"'
 
 - name: disable resolvconf
-  copy: src=resolvconf.conf dest=/etc/resolvconf.conf
+  copy:
+    src: resolvconf.conf
+    dest: /etc/resolvconf.conf
 
 - name: deploy custom resolv.conf template
-  template: src=resolv.conf.j2 dest=/etc/resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
 
 - include: postfix.yml
 - include: ssh.yml

@@ -1,11 +1,17 @@
 - name: restart SSH daemon
-  service: name=sshd state=restarted
+  service:
+    name: sshd
+    state: restarted
 
 - name: restart syslogd
-  service: name=syslogd state=restarted
+  service:
+    name: syslogd
+    state: restarted
 
 - name: postmap main.cf
   command: postmap /usr/local/etc/postfix/main.cf
 
 - name: restart postfix
-  service: name=postfix state=restarted
+  service:
+    name: postfix
+    state: restarted

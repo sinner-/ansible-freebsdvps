@@ -1,23 +1,31 @@
 ---
 - name: deploy local resolv.conf template
-  template: src=resolv.conf.j2 dest={{ jailhome }}/etc/resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: "{{ jailhome }}/etc/resolv.conf"
 
 - name: install nginx
   command: pkg -j {{ jailname }} install -y nginx
   args:
-    creates: /{{ jailhome }}/usr/local/sbin/nginx
+    creates: "{{ jailhome }}/usr/local/sbin/nginx"
   environment:
     http_proxy: http://squid:3128/
 
 - name: enable nginx in rc.conf
-  lineinfile: dest={{ jailhome }}/etc/rc.conf regexp=^nginx_enable= line=nginx_enable=\"YES\"
+  lineinfile:
+    dest: "{{ jailhome }}/etc/rc.conf"
+    regexp: ^nginx_enable=
+    line: nginx_enable="YES"
 
 - name: deploy nginx newsyslog.conf template
-  template: src=newsyslog.conf.j2 dest={{ jailhome }}/etc/newsyslog.conf.d/nginx.conf
+  template:
+    src: newsyslog.conf.j2
+    dest: "{{ jailhome }}/etc/newsyslog.conf.d/nginx.conf"
 
 - name: deploy nginx.conf template
-  template: src=nginx.conf.j2 dest={{ jailhome }}/usr/local/etc/nginx/nginx.conf
-              owner=root group=wheel mode=0644
+  template:
+    src: nginx.conf.j2
+    dest: "{{ jailhome }}/usr/local/etc/nginx/nginx.conf"
   notify: restart nginx
 
 - include: fcgiwrap.yml

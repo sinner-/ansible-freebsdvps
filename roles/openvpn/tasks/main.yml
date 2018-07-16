@@ -15,14 +15,20 @@
     - { path: '/usr/local/etc/openvpn/ssl/private', mode: '0600' }
 
 - name: install OpenSSL public certificates
-  template: src={{ item }} dest=/usr/local/etc/openvpn/ssl mode=0644
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/etc/openvpn/ssl
+    mode: 0644
   with_items:
     - certificates/ca.cert.pem
     - certificates/openvpn.cert.pem
   notify: restart OpenVPN
 
 - name: install OpenSSL private certificates
-  template: src={{ item }} dest=/usr/local/etc/openvpn/ssl/private mode=0600
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/etc/openvpn/ssl/private
+    mode: 0600
   with_items:
     - certificates/openvpn.key.pem
     - certificates/openvpn.dh2048.pem
@@ -30,9 +36,13 @@
   notify: restart OpenVPN
 
 - name: enable openvpn in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp=^openvpn_enable= line=openvpn_enable=\"YES\"
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^openvpn_enable=
+    line: openvpn_enable="YES"
 
 - name: deploy openvpn.conf template
-  template: src=openvpn.conf.j2 dest=/usr/local/etc/openvpn/openvpn.conf
-              owner=root group=wheel mode=0644
+  template:
+    src: openvpn.conf.j2
+    dest: /usr/local/etc/openvpn/openvpn.conf
   notify: restart OpenVPN

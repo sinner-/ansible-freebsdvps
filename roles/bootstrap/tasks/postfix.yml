@@ -1,9 +1,14 @@
 ---
 - name: disable sendmail in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp='^sendmail_enable=' line='sendmail_enable=\"NONE\"'
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: '^sendmail_enable='
+    line: 'sendmail_enable="NONE"'
 
 - name: stop sendmail service
-  service: name=sendmail state=stopped
+  service:
+    name: sendmail
+    state: stopped
 
 - name: install postfix
   command: pkg install -y postfix
@@ -11,19 +16,26 @@
     creates: /usr/local/sbin/postfix
 
 - name: enable postfix in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp=^postfix_enable= line=postfix_enable=\"YES\"
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^postfix_enable=
+    line: postfix_enable="YES"
 
 - name: deploy periodic.conf.local template
-  template: src=periodic.conf.local.j2 dest=/etc/periodic.conf.local
-              owner=root group=wheel mode=0644
+  template:
+    src: periodic.conf.local.j2
+    dest: /etc/periodic.conf.local
 
 - name: deploy mailer.conf template
-  template: src=mailer.conf.j2 dest=/etc/mail/mailer.conf
-              owner=root group=wheel mode=0644
+  template:
+    src: mailer.conf.j2
+    dest: /etc/mail/mailer.conf
 
 - name: deploy postmix main.cf template
-  template: src=main.cf.j2 dest=/usr/local/etc/postfix/main.cf
-              owner=root group=wheel mode=0644
+  template:
+    src: main.cf.j2
+    dest: /usr/local/etc/postfix/main.cf
+
   notify:
     - postmap main.cf
 

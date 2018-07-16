@@ -1,6 +1,11 @@
 ---
 - name: restart jail bridge
-  service: name=netif state=restarted args=bridge0
+  service:
+    name: netif
+    state: restarted
+    args: bridge0
 
 - name: restart jails
-  service: name=jail state=restarted
+  service:
+    name: jail
+    state: restarted

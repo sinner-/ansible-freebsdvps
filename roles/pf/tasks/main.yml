@@ -1,11 +1,18 @@
 ---
 - name: enable PF in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp=^pf_enable= line=pf_enable=\"YES\"
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^pf_enable=
+    line: pf_enable="YES"
 
 - name: enable gateway in rc.conf
-  lineinfile: dest=/etc/rc.conf regexp=^gateway_enable= line=gateway_enable=\"YES\"
+  lineinfile:
+    dest: /etc/rc.conf
+    regexp: ^gateway_enable=
+    line: gateway_enable="YES"
 
 - name: deploy pf.conf rule template
-  template: src=pf.conf.j2 dest=/etc/pf.conf
-              owner=root group=wheel mode=0644
+  template:
+    src: pf.conf.j2
+    dest: /etc/pf.conf
   notify: restart PF

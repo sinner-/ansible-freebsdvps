@@ -34,6 +34,9 @@
     owner: git
     group: git
     mode: 0600
+  notify:
+    - gitolite compile
+    - gitolite post compile
 
 - name: deploy gitolite.conf template
   template:

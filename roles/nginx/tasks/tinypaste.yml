@@ -2,5 +2,5 @@
 - name: add tinypaste cleanup crontab
   lineinfile:
     dest: "{{ jailhome }}/etc/crontab"
-    regexp: '^@weekly root find /usr/local/www/tinypaste/pastes/ -mtime +7 -exec rm {} \;'
+    regexp: '^@weekly root find /usr/local/www/tinypaste/pastes/'
     line: '@weekly root find /usr/local/www/tinypaste/pastes/ -mtime +7 -exec rm {} \;'

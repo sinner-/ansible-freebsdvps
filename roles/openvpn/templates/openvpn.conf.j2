@@ -2,9 +2,11 @@ local {{ ansible_default_ipv4.address }}
 port 1194
 proto udp
 dev tun
-cipher AES-256-CBC
-auth SHA512
+cipher AES-128-GCM
+auth SHA256
 tls-version-min 1.2
+tls-server
+opt-verify
 ca /usr/local/etc/openvpn/ssl/ca.cert.pem
 cert /usr/local/etc/openvpn/ssl/openvpn.cert.pem
 key /usr/local/etc/openvpn/ssl/private/openvpn.key.pem  # This file should be kept secret
@@ -21,7 +23,6 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-push "redirect-gateway def1"
 push "dhcp-option DNS {{ jail_bridge_subnet }}.{{ dns_ip }}"
 push "dhcp-option DOMAIN {{ vpn_dns_search }}"
 push "route {{ jail_bridge_subnet }}.0 255.255.255.0 {{ vpn_tun_subnet }}.1 0"

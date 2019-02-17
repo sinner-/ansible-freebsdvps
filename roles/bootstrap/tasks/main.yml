@@ -3,7 +3,7 @@
   raw: /usr/sbin/pkg update
 
 - name: install Python
-  raw: /usr/sbin/pkg install -y python
+  raw: /usr/sbin/pkg install -y python36
 
 - name: set live hostname to master
   hostname:

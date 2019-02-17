@@ -1,4 +1,4 @@
-freebsd_release: 11.2
+freebsd_release: 12.0
 vpn_tun_subnet: 10.8.0
 vpn_dns_search: local
 ntp_pool: au.pool.ntp.org

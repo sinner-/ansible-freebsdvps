@@ -10,6 +10,7 @@
     creates: "{{ jailhome }}/usr/local/sbin/postfix"
   environment:
     http_proxy: http://squid:3128/
+    POSTFIX_DEFAULT_MTA: yes
 
 - name: enable postfix in rc.conf
   lineinfile:

@@ -1,3 +1,15 @@
----
-- name: restart squid
-  include: squid_restart.yml
+- name: check squid status
+  command: jexec {{ jailname }} service squid onestatus
+  register: result
+  ignore_errors: True
+  listen: restart squid
+
+- name: start squid
+  command: jexec {{ jailname }} service squid start
+  when: "result.rc != 0"
+  listen: restart squid
+
+- name: reload squid
+  command: jexec {{ jailname }} service squid reload
+  when: "result.rc == 0"
+  listen: restart squid

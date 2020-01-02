@@ -1,2 +1,19 @@
-- name: restart PF
-  include: pf_restart.yml
+- name: check pf status
+  command: service pf onestatus
+  register: result
+  ignore_errors: True
+  listen: restart PF
+
+- name: start pf
+  service:
+    name: pf
+    state: started
+  when: "result.rc != 0"
+  listen: restart PF
+
+- name: reload pf
+  service:
+    name: pf
+    state: reloaded
+  when: "result.rc == 0"
+  listen: restart PF

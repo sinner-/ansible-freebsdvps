@@ -1,2 +1,19 @@
-- name: restart OpenVPN
-  include: openvpn_restart.yml
+- name: check openvpn status
+  command: service openvpn onestatus
+  register: result
+  ignore_errors: True
+  listen: "restart OpenVPN"
+
+- name: start openvpn
+  service:
+    name: openvpn
+    state: started
+  when: "result.rc != 0"
+  listen: "restart OpenVPN"
+
+- name: reload openvpn
+  service:
+    name: openvpn
+    state: restarted
+  when: "result.rc == 0"
+  listen: "restart OpenVPN"

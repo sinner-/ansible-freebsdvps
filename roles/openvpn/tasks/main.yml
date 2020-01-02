@@ -20,7 +20,7 @@
     dest: /usr/local/etc/openvpn/ssl
     mode: 0644
   with_items:
-    - certificates/ca.cert.pem
+    - certificates/cacert.pem
     - certificates/openvpn.cert.pem
   notify: restart OpenVPN
 

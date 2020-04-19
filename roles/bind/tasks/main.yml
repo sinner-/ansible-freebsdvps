@@ -5,7 +5,7 @@
     dest: "{{ jailhome }}/etc/resolv.conf"
 
 - name: install bind
-  command: pkg -j {{ jailname }} install -y bind914
+  command: pkg -j {{ jailname }} install -y bind916
   args:
     creates: "{{ jailhome }}/usr/local/sbin/named"
   environment:

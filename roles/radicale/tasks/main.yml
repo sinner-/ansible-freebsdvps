@@ -5,9 +5,9 @@
     dest: "{{ jailhome }}/etc/resolv.conf"
 
 - name: install radicale
-  command: pkg -j {{ jailname }} install -y py36-radicale py36-ldap
+  command: pkg -j {{ jailname }} install -y py37-radicale py37-ldap
   args:
-    creates: "{{ jailhome }}/usr/local/etc/py36-radicale/config"
+    creates: "{{ jailhome }}/usr/local/etc/py37-radicale/config"
   environment:
     http_proxy: http://squid:3128/
 
@@ -20,5 +20,5 @@
 - name: deploy radicale config template
   template:
     src: config.j2
-    dest: "{{ jailhome }}/usr/local/etc/py36-radicale/config"
+    dest: "{{ jailhome }}/usr/local/etc/py37-radicale/config"
   notify: restart radicale

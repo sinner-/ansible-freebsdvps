@@ -1,4 +1,4 @@
-freebsd_release: 12.1
+freebsd_release: 12.2
 vpn_tun_subnet: 10.8.0
 vpn_dns_search: local
 ntp_pool: au.pool.ntp.org
@@ -20,6 +20,6 @@ cal_ip: 13
 ldap_ip: 14
 mail_ip: 15
 ssh_keys:
- - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4oU3wv4audikXJRPX3smotYThiznF4MG4APGY4alWcaEfTstkQozKE956qLtbkVA3VXf7OWkVkb75bb9RgNlu9DFrf3vn30O++4Dy9Q8de+Rwc3h068/XlDMolmXzcBm6jcdE+N1F+Ec+nc6Op/6GKL54kZYoXLd3V8roW4kO2vbPHi+NLjgw92aiXHUrrUfqETHh5h+3HoIZN+kZeZuIayj2KAIJZ+d+PzIzOzzc4P1UflZkrkiewq0vrla7uDLldB0yC4gLS5p83aom55NcknrC05GQOHNVTY26nf3pIPstnrXEEfeopg9t0awtAJckchO6ZKVtwfH+XWOBXu7lQ== sina@sina-laptop
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3CozVtLALNOsO+Fp/7isG3Z8tG4+lKR1fT+nyojLmaW5GiEwgB+/kUrgT8QimpBxqUpa9Ez7iRFwEgwCp9kt8cgk1zj3Ot+qsfDkbYzwxru0+ubay7asEKwKvyhCbXP/bVAgYMTBFvmf7/izYMJwaRJp67wynJGDm2kyn2eVGXZJVJr6kdzNZWaufgMViNvZl9jNLiRxXed++xSgWzvznHqTm6eklcwepojG4u9jjApkGAFA80rW/4oQtKkJpjpvE2siQvKNqAzBBtvgeE2HgAb8N1fU3z2tKukELr/pQgOlB301NH6bUSOOh3z46djJoJCd5Fx/2TyDa4SPyUQuwtzHFvXClz/KYEtVpRLeoDT55+ytq5hLE/ELUvFmc9lerVQzEDxeJBWPNt5sJPDMd/x1TO0CtHvsh8ZDcFP7/utUhFmPGfDTBqN0kC8v9QPeI34x9eeImTbOgZgMMl7oeOGEBOoYwuDH7gZOSU83h/bsRrXQhRiNda5Fa1yehHJUS4Iv3knLF3zr+d+xmQ9glD7o5Ysq9akukhAe5j+3ouMWNPQcidJmhWaOvELMioxh+RWTTxu4ntrF/LiOdLgs17Y605n5UIkDYY4wvRTVgXcBYdEhUEmTGo2q/MZMjpOBSGWunikGamyXuBLu29STANi928pWIasxtBqXWdenVYw== sina@sina-laptop
 repos:
  - ansible-freebsdvps

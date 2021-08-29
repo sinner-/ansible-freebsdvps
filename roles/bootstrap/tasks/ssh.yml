@@ -1,4 +1,9 @@
 ---
+- name: copy SSH daemon configuration
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+
 - name: ensure /root/.ssh directory exists
   file:
     path: /root/.ssh

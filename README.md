@@ -1,7 +1,7 @@
 # ansible-freebsdvps
 Building on the work from https://github.com/sinner-/freebsdfun this is an ansible project to manage a VM based FreeBSD VPS.
 
-Current as of FreeBSD 12.1.
+Current as of FreeBSD 13.0.
 
 ## Goals
 * Manage PF based firewall.
@@ -22,7 +22,7 @@ Current as of FreeBSD 12.1.
   * radicale uses LDAP.
 
 ## Bootstrap
-* Boot a FreeBSD 11 VM (tested on FreeBSD 11.2)
+* Boot a FreeBSD 13 VM (tested on FreeBSD 13.0)
 * Clone a copy of this repository:
   * `git clone https://github.com/sinner-/ansible-freebsdvps`
   * `cd ansible-freebsdvps`

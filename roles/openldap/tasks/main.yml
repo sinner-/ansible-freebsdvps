@@ -26,14 +26,14 @@
   template:
     src: slapd.conf.j2
     dest: "{{ jailhome }}/usr/local/etc/openldap/slapd.conf"
-    owner: 389
-    group: 389
+    owner: "389"
+    group: "389"
   notify: restart slapd
 
 - name: deploy postfix schema template
   template:
     src: postfix.schema.j2
     dest: "{{ jailhome }}/usr/local/etc/openldap/schema/postfix.schema"
-    owner: 389
-    group: 389
+    owner: "389"
+    group: "389"
   notify: restart slapd

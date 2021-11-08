@@ -11,7 +11,7 @@ ca /usr/local/etc/openvpn/ssl/cacert.pem
 cert /usr/local/etc/openvpn/ssl/openvpn.cert.pem
 key /usr/local/etc/openvpn/ssl/private/openvpn.key.pem  # This file should be kept secret
 dh /usr/local/etc/openvpn/ssl/private/openvpn.dh2048.pem
-tls-auth /usr/local/etc/openvpn/ssl/private/tls-auth.pem 0 # This file is secret
+tls-crypt /usr/local/etc/openvpn/ssl/private/tls-crypt.pem # This file is secret
 topology subnet
 server {{ vpn_tun_subnet }}.0 255.255.255.0
 ifconfig-pool-persist ipp.txt

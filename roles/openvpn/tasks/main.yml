@@ -32,7 +32,7 @@
   with_items:
     - certificates/openvpn.key.pem
     - certificates/openvpn.dh2048.pem
-    - certificates/tls-auth.pem
+    - certificates/tls-crypt.pem
   notify: restart OpenVPN
 
 - name: enable openvpn in rc.conf

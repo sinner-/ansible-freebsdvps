@@ -31,6 +31,11 @@
     regexp: '^ifconfig_vtnet0='
     line: 'ifconfig_vtnet0="dhcp -rxcsum -txcsum -lro -tso4 -tso6 -vlanhwtso"'
 
+- name: disable resolvconf
+  copy:
+    src: resolvconf.conf
+    dest: /etc/resolvconf.conf
+
 - name: deploy custom resolv.conf template
   template:
     src: resolv.conf.j2

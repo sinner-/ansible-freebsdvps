@@ -17,8 +17,8 @@ server {{ vpn_tun_subnet }}.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 client-to-client
 keepalive 10 120
-user nobody
-group nobody
+user openvpn
+group openvpn
 persist-key
 persist-tun
 status openvpn-status.log

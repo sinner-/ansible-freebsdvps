@@ -84,7 +84,7 @@ pass in on lo0 all
 pass out on lo0 all
 
 #Isolate inter-jail traffic
-block drop in on lo0 from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.0/24
+block drop in on bridge0 from {{ jail_bridge_subnet }}.0/24 to {{ jail_bridge_subnet }}.0/24
 
 #Whitelist
 pass out keep state

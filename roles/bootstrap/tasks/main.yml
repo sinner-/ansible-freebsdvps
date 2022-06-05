@@ -41,5 +41,5 @@
     src: resolv.conf.j2
     dest: /etc/resolv.conf
 
-- include: ssh.yml
-- include: postfix.yml
+- import_tasks: ssh.yml
+- import_tasks: postfix.yml

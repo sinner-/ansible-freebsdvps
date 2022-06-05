@@ -5,7 +5,7 @@
     dest: "{{ jailhome }}/etc/resolv.conf"
 
 - name: install openldap
-  command: pkg -j {{ jailname }} install -y openldap-server
+  command: pkg -j {{ jailname }} install -y openldap26-server
   args:
     creates: "{{ jailhome }}/usr/local/libexec/slapd"
   environment:

@@ -5,7 +5,7 @@
     dest: "{{ jailhome }}/etc/resolv.conf"
 
 - name: install radicale
-  command: pkg -j {{ jailname }} install -y py38-radicale py38-ldap
+  command: pkg -j {{ jailname }} install -y py39-radicale py39-ldap
   args:
     creates: "{{ jailhome }}/usr/local/etc/py37-radicale/config"
   environment:

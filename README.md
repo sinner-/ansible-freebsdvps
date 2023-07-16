@@ -1,7 +1,7 @@
 # ansible-freebsdvps
 Building on the work from https://github.com/sinner-/freebsdfun this is an ansible project to manage a VM based FreeBSD VPS.
 
-Current as of FreeBSD 13.1.
+Current as of FreeBSD 13.2.
 
 ## Goals
 * Manage PF based firewall.

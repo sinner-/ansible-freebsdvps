@@ -26,11 +26,11 @@
 - name: deploy local DNS zone
   template:
     src: dns.local.j2
-    dest: "{{ jailhome }}/usr/local/etc/namedb/master/dns.local"
+    dest: "{{ jailhome }}/usr/local/etc/namedb/primary/dns.local"
   notify: restart named
 
 - name: deploy local reverse DNS template
   template:
     src: reversedns.local.j2
-    dest: "{{ jailhome }}/usr/local/etc/namedb/master/reversedns.local"
+    dest: "{{ jailhome }}/usr/local/etc/namedb/primary/reversedns.local"
   notify: restart named

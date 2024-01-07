@@ -19,7 +19,7 @@
 - name: mount gitolite repodir
   mount:
     name: "{{ jailhome }}/rw/usr/local/www/git"
-    src: /usr/home/git/repositories
+    src: /home/git/repositories
     fstype: nullfs
     opts: ro
     state: mounted

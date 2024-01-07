@@ -16,11 +16,11 @@
   become_user: git
   become_method: su
   args:
-    creates: /usr/home/git/.gitolite
+    creates: /home/git/.gitolite
 
 - name: remove dummy cruft
   file:
-    path: /usr/home/git/{{ item }}
+    path: /home/git/{{ item }}
     state: absent
   with_items:
     - repositories/gitolite-admin.git
@@ -30,7 +30,7 @@
 - name: deploy .gitolite.rc template
   template:
     src: .gitolite.rc.j2
-    dest: /usr/home/git/.gitolite.rc
+    dest: /home/git/.gitolite.rc
     owner: git
     group: git
     mode: 0600
@@ -41,7 +41,7 @@
 - name: deploy gitolite.conf template
   template:
     src: gitolite.conf.j2
-    dest: /usr/home/git/.gitolite/conf/gitolite.conf
+    dest: /home/git/.gitolite/conf/gitolite.conf
     owner: git
     group: git
     mode: 0600
@@ -51,14 +51,14 @@
 
 - name: create gitolite keydir
   file:
-    path: /usr/home/git/.gitolite/keydir
+    path: /home/git/.gitolite/keydir
     state: directory
     owner: git
     group: git
 
 - name: make gitolite repodir world readable
   file:
-    path: /usr/home/git/repositories
+    path: /home/git/repositories
     state: directory
     owner: git
     group: git
@@ -67,7 +67,7 @@
 - name: gitolite user SSH key
   copy:
     content: "{{ item }}"
-    dest: /usr/home/git/.gitolite/keydir/gituser.pub
+    dest: /home/git/.gitolite/keydir/gituser.pub
     owner: git
     group: git
   with_items: "{{ ssh_keys }}"
